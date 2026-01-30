@@ -169,6 +169,10 @@
             visibility: visible;
         }
         
+        .tooltip-wide {
+            width: 340px;
+        }
+        
         .tooltip::after {
             content: '';
             position: absolute;
@@ -489,13 +493,17 @@
                 <div class="kpi-label">Net Revenue Retention <span class="info-icon">ⓘ</span></div>
                 <div class="kpi-value">89%</div>
                 <div class="kpi-change warning">⚠️ &lt; 100%</div>
-                <div class="tooltip">
+                <div class="tooltip tooltip-wide">
                     <strong>Net Revenue Retention (NRR) - Janvier</strong><br><br>
-                    <code>(MRR fin Déc + Expansion - Contraction - Churn) / MRR fin Déc</code><br><br>
-                    <strong>Détail :</strong><br>
-                    <code>MRR début mois : $4,765<br>+ Expansion :     +$370<br>- Contraction :   -$207<br>- Churn :         -$686<br>―――――――――――――――――――<br>= $4,242 / $4,765 = <strong>89%</strong></code><br><br>
-                    • <strong>&gt; 100%</strong> = croissance sur base existante ✓<br>
-                    • <strong>&lt; 100%</strong> = perte nette ⚠️
+                    Mesure la rétention des <strong>clients existants uniquement</strong><br>(exclut New Business &amp; Reactivations)<br><br>
+                    <strong>Calcul :</strong><br>
+                    <code>MRR fin Déc :     $4,765<br>+ Expansion :     +$370<br>- Contraction :   -$207<br>- Churn :         -$686<br>―――――――――――――――――――<br>Retenu :          $4,242<br>NRR = $4,242 / $4,765 = <strong>89%</strong></code><br><br>
+                    <strong>Pourquoi le MRR total = $5,362 ?</strong><br>
+                    <code>Retenu :          $4,242<br>+ New Business :  +$888<br>+ Reactivations : +$232<br>―――――――――――――――――――<br>MRR Janvier :     $5,362</code><br><br>
+                    <strong>Interprétation :</strong><br>
+                    • <strong>&gt; 100%</strong> = clients existants génèrent plus ✓<br>
+                    • <strong>&lt; 100%</strong> = on perd du revenu sur la base existante ⚠️<br><br>
+                    <em>À 89%, on perd 11%/mois sur les clients existants.<br>Le New Biz compense, mais c'est un warning.</em>
                 </div>
             </div>
         </div>
