@@ -124,6 +124,61 @@
         .kpi-change.negative { color: var(--danger); }
         .kpi-change.warning { color: var(--warning); }
         
+        /* Tooltip */
+        .has-tooltip {
+            position: relative;
+            cursor: help;
+        }
+        
+        .info-icon {
+            font-size: 0.7rem;
+            opacity: 0.6;
+            margin-left: 0.25rem;
+        }
+        
+        .tooltip {
+            position: absolute;
+            bottom: calc(100% + 10px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: #334155;
+            border: 1px solid #475569;
+            border-radius: 8px;
+            padding: 1rem;
+            font-size: 0.8rem;
+            line-height: 1.5;
+            width: 280px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s, visibility 0.2s;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        
+        .tooltip code {
+            background: rgba(0,0,0,0.3);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            display: block;
+            margin: 0.5rem 0;
+        }
+        
+        .has-tooltip:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 8px solid transparent;
+            border-top-color: #334155;
+        }
+        
         .grid-2 {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
@@ -430,10 +485,17 @@
                 <div class="kpi-value">90</div>
                 <div class="kpi-change positive">+30% vs Dec</div>
             </div>
-            <div class="kpi-card">
-                <div class="kpi-label">Net Revenue Retention</div>
+            <div class="kpi-card has-tooltip">
+                <div class="kpi-label">Net Revenue Retention <span class="info-icon">ⓘ</span></div>
                 <div class="kpi-value">89%</div>
                 <div class="kpi-change warning">⚠️ &lt; 100%</div>
+                <div class="tooltip">
+                    <strong>Net Revenue Retention (NRR)</strong><br><br>
+                    <code>(MRR début + Expansion - Contraction - Churn) / MRR début × 100</code><br><br>
+                    Mesure le revenu conservé des clients existants, expansion incluse.<br><br>
+                    • <strong>&gt; 100%</strong> = croissance sur base existante ✓<br>
+                    • <strong>&lt; 100%</strong> = perte nette sur base existante ⚠️
+                </div>
             </div>
         </div>
 
