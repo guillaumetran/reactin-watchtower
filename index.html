@@ -8,7 +8,7 @@
     <script>
         // Simple client-side auth (not for highly sensitive data)
         // Password hash (SHA-256 of the actual password)
-        const PASS_HASH = '@@PASS_HASH@@';
+        const PASS_HASH = '37eb841a6f113cb3897d955e357e9f618ba2dcecaf46593dfa1266b36460dc7d';
         
         async function sha256(str) {
             const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
