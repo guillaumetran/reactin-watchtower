@@ -42,7 +42,7 @@
     "seoImpressions": [15626, 10344, 12161, 10709, 28451],
     "lpViews": [null, 3400, 1900, 2000, 2200],
     "lpConversion": [null, 3.9, 5.8, 3.45, 4.1],
-    "signups": [92, 134, 110, null, 90],
+    "signups": [92, 134, 110, 69, 90],
     "activationRate": [62, 65, 78, null, 54],
     "arpu": [null, 41, 50, 52, 54],
     "churn": [8, 7, 15, 10, 12]
