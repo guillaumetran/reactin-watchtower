@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReactIn Growth Watchtower</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --bg: #0f172a;
+            --card: #1e293b;
+            --text: #f1f5f9;
+            --muted: #94a3b8;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        
+        .container { max-width: 1400px; margin: 0 auto; }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #334155;
+        }
+        
+        h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .date { color: var(--muted); font-size: 0.9rem; }
+        
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .kpi-card {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 1.25rem;
+            border: 1px solid #334155;
+        }
+        
+        .kpi-card.highlight {
+            border-color: var(--primary);
+            background: linear-gradient(135deg, #1e293b 0%, #312e81 100%);
+        }
+        
+        .kpi-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--muted);
+            margin-bottom: 0.5rem;
+        }
+        
+        .kpi-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+        }
+        
+        .kpi-change {
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+        }
+        
+        .kpi-change.positive { color: var(--success); }
+        .kpi-change.negative { color: var(--danger); }
+        .kpi-change.warning { color: var(--warning); }
+        
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .card {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid #334155;
+        }
+        
+        .card h2 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 250px;
+        }
+        
+        .funnel {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .funnel-step {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .funnel-bar {
+            height: 32px;
+            background: linear-gradient(90deg, var(--primary), #818cf8);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            padding: 0 1rem;
+            font-weight: 600;
+            font-size: 0.85rem;
+            min-width: 60px;
+            transition: all 0.3s;
+        }
+        
+        .funnel-label {
+            font-size: 0.85rem;
+            color: var(--muted);
+            min-width: 140px;
+        }
+        
+        .funnel-pct {
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+        
+        .breakdown-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+        }
+        
+        .breakdown-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            background: rgba(255,255,255,0.03);
+            border-radius: 8px;
+        }
+        
+        .breakdown-item .label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+        }
+        
+        .breakdown-item .value {
+            font-weight: 600;
+        }
+        
+        .breakdown-item.positive .value { color: var(--success); }
+        .breakdown-item.negative .value { color: var(--danger); }
+        
+        .alerts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+        
+        .alert {
+            padding: 1rem 1.25rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .alert.success {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #6ee7b7;
+        }
+        
+        .alert.warning {
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            color: #fcd34d;
+        }
+        
+        .alert strong { display: block; margin-bottom: 0.25rem; }
+        
+        .traffic-sources {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .source-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+        
+        .source-badge .count {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .table-container { overflow-x: auto; }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+        
+        th, td {
+            padding: 0.75rem;
+            text-align: right;
+            border-bottom: 1px solid #334155;
+        }
+        
+        th:first-child, td:first-child { text-align: left; }
+        
+        th {
+            color: var(--muted);
+            font-weight: 500;
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            letter-spacing: 0.05em;
+        }
+        
+        .highlight-cell { color: var(--primary); font-weight: 600; }
+
+        footer {
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid #334155;
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔭 ReactIn Growth Watchtower</h1>
+            <span class="date">Mis à jour le 30 Janvier 2026</span>
+        </header>
+
+        <!-- KPI Cards -->
+        <div class="kpi-grid">
+            <div class="kpi-card highlight">
+                <div class="kpi-label">MRR</div>
+                <div class="kpi-value">$5,362</div>
+                <div class="kpi-change positive">+13% vs Dec</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Paid Subscribers</div>
+                <div class="kpi-value">100 🎉</div>
+                <div class="kpi-change positive">+8 ce mois</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">ARPU</div>
+                <div class="kpi-value">$54</div>
+                <div class="kpi-change positive">+$4 vs Dec</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">SEO Impressions</div>
+                <div class="kpi-value">28,451</div>
+                <div class="kpi-change positive">+166% 🚀</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Signups</div>
+                <div class="kpi-value">90</div>
+                <div class="kpi-change negative">-18% vs Nov</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Net Revenue Retention</div>
+                <div class="kpi-value">89%</div>
+                <div class="kpi-change warning">⚠️ &lt; 100%</div>
+            </div>
+        </div>
+
+        <!-- Charts Row -->
+        <div class="grid-2">
+            <div class="card">
+                <h2>📈 MRR Evolution</h2>
+                <div class="chart-container">
+                    <canvas id="mrrChart"></canvas>
+                </div>
+            </div>
+            <div class="card">
+                <h2>👥 Paid Subscribers</h2>
+                <div class="chart-container">
+                    <canvas id="subsChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Funnel & Breakdown -->
+        <div class="grid-2">
+            <div class="card">
+                <h2>🎯 Activation Funnel (Janvier)</h2>
+                <div class="funnel">
+                    <div class="funnel-step">
+                        <span class="funnel-label">Signups</span>
+                        <div class="funnel-bar" style="width: 100%;">90</div>
+                        <span class="funnel-pct">100%</span>
+                    </div>
+                    <div class="funnel-step">
+                        <span class="funnel-label">LinkedIn Connected</span>
+                        <div class="funnel-bar" style="width: 63%;">57</div>
+                        <span class="funnel-pct">63%</span>
+                    </div>
+                    <div class="funnel-step">
+                        <span class="funnel-label">List Created</span>
+                        <div class="funnel-bar" style="width: 63%;">57</div>
+                        <span class="funnel-pct">63%</span>
+                    </div>
+                    <div class="funnel-step">
+                        <span class="funnel-label">Campaign Created</span>
+                        <div class="funnel-bar" style="width: 54%;">49</div>
+                        <span class="funnel-pct">54% ⚠️</span>
+                    </div>
+                    <div class="funnel-step">
+                        <span class="funnel-label">Campaign Running</span>
+                        <div class="funnel-bar" style="width: 46%;">41</div>
+                        <span class="funnel-pct">46%</span>
+                    </div>
+                    <div class="funnel-step">
+                        <span class="funnel-label">Premium</span>
+                        <div class="funnel-bar" style="width: 13%; background: linear-gradient(90deg, #10b981, #34d399);">12</div>
+                        <span class="funnel-pct">13%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <h2>💰 Revenue Breakdown (Janvier)</h2>
+                <div class="breakdown-grid">
+                    <div class="breakdown-item positive">
+                        <span class="label">🆕 New Business</span>
+                        <span class="value">+$888</span>
+                    </div>
+                    <div class="breakdown-item positive">
+                        <span class="label">📈 Expansion</span>
+                        <span class="value">+$370</span>
+                    </div>
+                    <div class="breakdown-item positive">
+                        <span class="label">🔄 Reactivation</span>
+                        <span class="value">+$232</span>
+                    </div>
+                    <div class="breakdown-item negative">
+                        <span class="label">📉 Contraction</span>
+                        <span class="value">-$207</span>
+                    </div>
+                    <div class="breakdown-item negative">
+                        <span class="label">❌ Churn</span>
+                        <span class="value">-$686</span>
+                    </div>
+                    <div class="breakdown-item" style="grid-column: span 2; background: rgba(99, 102, 241, 0.1);">
+                        <span class="label" style="font-weight: 600;">Net MRR Movement</span>
+                        <span class="value" style="color: var(--success); font-size: 1.25rem;">+$597</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Traffic Sources -->
+        <div class="card" style="margin-bottom: 1.5rem;">
+            <h2>🌐 Traffic Sources (Janvier)</h2>
+            <div class="traffic-sources">
+                <div class="source-badge">
+                    <span>Google</span>
+                    <span class="count">453</span>
+                </div>
+                <div class="source-badge">
+                    <span>LinkedIn</span>
+                    <span class="count">309</span>
+                </div>
+                <div class="source-badge">
+                    <span>Twitter</span>
+                    <span class="count">65</span>
+                </div>
+                <div class="source-badge">
+                    <span>OnePageLove</span>
+                    <span class="count">37</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Historical Table -->
+        <div class="card" style="margin-bottom: 1.5rem;">
+            <h2>📊 Historique Mensuel</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Métrique</th>
+                            <th>Sept</th>
+                            <th>Oct</th>
+                            <th>Nov</th>
+                            <th>Déc</th>
+                            <th>Jan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>SEO Impressions</td>
+                            <td>15,626</td>
+                            <td>10,344</td>
+                            <td>12,161</td>
+                            <td>10,709</td>
+                            <td class="highlight-cell">28,451</td>
+                        </tr>
+                        <tr>
+                            <td>LP Views</td>
+                            <td>—</td>
+                            <td>~3,400</td>
+                            <td>~1,900</td>
+                            <td>~2,000</td>
+                            <td class="highlight-cell">2,200</td>
+                        </tr>
+                        <tr>
+                            <td>LP Conversion</td>
+                            <td>—</td>
+                            <td>3.9%</td>
+                            <td>5.8%</td>
+                            <td>3.45%</td>
+                            <td class="highlight-cell">4.1%</td>
+                        </tr>
+                        <tr>
+                            <td>Signups</td>
+                            <td>92</td>
+                            <td>134</td>
+                            <td>110</td>
+                            <td>—</td>
+                            <td class="highlight-cell">90</td>
+                        </tr>
+                        <tr>
+                            <td>Activation Rate</td>
+                            <td>62%</td>
+                            <td>65%</td>
+                            <td>78%</td>
+                            <td>—</td>
+                            <td class="highlight-cell">54%</td>
+                        </tr>
+                        <tr>
+                            <td>MRR</td>
+                            <td>$2,497</td>
+                            <td>$3,264</td>
+                            <td>$4,322</td>
+                            <td>$4,765</td>
+                            <td class="highlight-cell">$5,362</td>
+                        </tr>
+                        <tr>
+                            <td>Paid Subs</td>
+                            <td>—</td>
+                            <td>80</td>
+                            <td>86</td>
+                            <td>92</td>
+                            <td class="highlight-cell">100</td>
+                        </tr>
+                        <tr>
+                            <td>ARPU</td>
+                            <td>—</td>
+                            <td>$41</td>
+                            <td>$50</td>
+                            <td>$52</td>
+                            <td class="highlight-cell">$54</td>
+                        </tr>
+                        <tr>
+                            <td>Churn (clients)</td>
+                            <td>8</td>
+                            <td>7</td>
+                            <td>15</td>
+                            <td>10</td>
+                            <td class="highlight-cell">12</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Alerts -->
+        <div class="alerts">
+            <div class="alert success">
+                <strong>🚀 SEO Explosion</strong>
+                Impressions x2.6 en janvier. Quelque chose rank très fort — à investiguer !
+            </div>
+            <div class="alert success">
+                <strong>🎉 100 Paid Subs</strong>
+                Milestone atteint ! La croissance continue.
+            </div>
+            <div class="alert success">
+                <strong>📈 Expansion Revenue</strong>
+                $370 d'expansion ce mois — les users upgradent.
+            </div>
+            <div class="alert warning">
+                <strong>⚠️ CTR en chute</strong>
+                4.5% → 1.5%. Les impressions montent mais pas les clics. Meta descriptions à revoir.
+            </div>
+            <div class="alert warning">
+                <strong>⚠️ Activation baisse</strong>
+                78% → 54% créent des campagnes. Onboarding à checker.
+            </div>
+            <div class="alert warning">
+                <strong>⚠️ NRR &lt; 100%</strong>
+                89% de rétention nette. Le churn érode la base existante.
+            </div>
+        </div>
+
+        <footer>
+            ReactIn Growth Watchtower • Généré par Rufus 🐕 & Clawd 🦫
+        </footer>
+    </div>
+
+    <script>
+        const chartConfig = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                x: {
+                    grid: { color: 'rgba(255,255,255,0.05)' },
+                    ticks: { color: '#94a3b8' }
+                },
+                y: {
+                    grid: { color: 'rgba(255,255,255,0.05)' },
+                    ticks: { color: '#94a3b8' }
+                }
+            }
+        };
+
+        // MRR Chart
+        new Chart(document.getElementById('mrrChart'), {
+            type: 'line',
+            data: {
+                labels: ['Sept', 'Oct', 'Nov', 'Déc', 'Jan'],
+                datasets: [{
+                    data: [2497, 3264, 4322, 4765, 5362],
+                    borderColor: '#6366f1',
+                    backgroundColor: 'rgba(99, 102, 241, 0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    pointBackgroundColor: '#6366f1',
+                    pointRadius: 6,
+                    pointHoverRadius: 8
+                }]
+            },
+            options: {
+                ...chartConfig,
+                scales: {
+                    ...chartConfig.scales,
+                    y: {
+                        ...chartConfig.scales.y,
+                        ticks: {
+                            ...chartConfig.scales.y.ticks,
+                            callback: (v) => '$' + v.toLocaleString()
+                        }
+                    }
+                }
+            }
+        });
+
+        // Subscribers Chart
+        new Chart(document.getElementById('subsChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Sept', 'Oct', 'Nov', 'Déc', 'Jan'],
+                datasets: [{
+                    data: [72, 80, 86, 92, 100],
+                    backgroundColor: ['#475569', '#475569', '#475569', '#475569', '#10b981'],
+                    borderRadius: 6
+                }]
+            },
+            options: chartConfig
+        });
+    </script>
+</body>
+</html>
