@@ -708,6 +708,38 @@
             </div>
         </div>
 
+        <!-- MRR Projection -->
+        <div class="card" style="margin-bottom: 1.5rem;">
+            <h2>🔮 Projection MRR (12 mois)</h2>
+            <p style="color: var(--muted); font-size: 0.85rem; margin-bottom: 1rem;">
+                Basé sur la croissance moyenne MoM des 4 derniers mois (~21%)
+            </p>
+            <div class="chart-container" style="height: 300px;">
+                <canvas id="projectionChart"></canvas>
+            </div>
+            <div class="projection-summary" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-top: 1.5rem;">
+                <div style="text-align: center; padding: 1rem; background: rgba(99, 102, 241, 0.1); border-radius: 8px;">
+                    <div style="font-size: 0.75rem; color: var(--muted); text-transform: uppercase;">MRR Actuel</div>
+                    <div style="font-size: 1.5rem; font-weight: 700;">$5,362</div>
+                </div>
+                <div style="text-align: center; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 8px;">
+                    <div style="font-size: 0.75rem; color: var(--muted); text-transform: uppercase;">MRR +6 mois</div>
+                    <div style="font-size: 1.5rem; font-weight: 700; color: var(--success);">$16,847</div>
+                </div>
+                <div style="text-align: center; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 8px;">
+                    <div style="font-size: 0.75rem; color: var(--muted); text-transform: uppercase;">MRR +12 mois</div>
+                    <div style="font-size: 1.5rem; font-weight: 700; color: var(--success);">$52,900</div>
+                </div>
+                <div style="text-align: center; padding: 1rem; background: rgba(245, 158, 11, 0.1); border-radius: 8px;">
+                    <div style="font-size: 0.75rem; color: var(--muted); text-transform: uppercase;">ARR Projeté</div>
+                    <div style="font-size: 1.5rem; font-weight: 700; color: var(--warning);">$634K</div>
+                </div>
+            </div>
+            <p style="color: var(--muted); font-size: 0.75rem; margin-top: 1rem; font-style: italic;">
+                ⚠️ Projection optimiste basée sur croissance constante. Le taux a ralenti récemment (10-12% vs 30%+ avant).
+            </p>
+        </div>
+
         <!-- Alerts -->
         <div class="alerts">
             <div class="alert success">
@@ -803,6 +835,50 @@
                 }]
             },
             options: chartConfig
+        });
+
+        // MRR Projection Chart
+        // Growth rates: Sept→Oct: 30.7%, Oct→Nov: 32.4%, Nov→Dec: 10.3%, Dec→Jan: 12.5%
+        // Average MoM growth: ~21%
+        const projectionMonths = ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sept', 'Oct', 'Nov', 'Déc', 'Jan 27'];
+        const avgGrowth = 0.21;
+        const projectedMRR = [5362];
+        for (let i = 1; i < 13; i++) {
+            projectedMRR.push(Math.round(projectedMRR[i-1] * (1 + avgGrowth)));
+        }
+        
+        new Chart(document.getElementById('projectionChart'), {
+            type: 'line',
+            data: {
+                labels: projectionMonths,
+                datasets: [{
+                    label: 'MRR Projeté (21% MoM)',
+                    data: projectedMRR,
+                    borderColor: '#10b981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    pointBackgroundColor: '#10b981',
+                    pointRadius: 4,
+                    pointHoverRadius: 6
+                }]
+            },
+            options: {
+                ...chartConfig,
+                plugins: {
+                    legend: { display: true, labels: { color: '#94a3b8' } }
+                },
+                scales: {
+                    ...chartConfig.scales,
+                    y: {
+                        ...chartConfig.scales.y,
+                        ticks: {
+                            ...chartConfig.scales.y.ticks,
+                            callback: (v) => '$' + (v/1000).toFixed(0) + 'K'
+                        }
+                    }
+                }
+            }
         });
     </script>
 </body>
