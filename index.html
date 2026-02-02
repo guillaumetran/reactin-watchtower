@@ -710,9 +710,9 @@
 
         <!-- MRR Projection -->
         <div class="card" style="margin-bottom: 1.5rem;">
-            <h2>🔮 Projection MRR (12 mois)</h2>
+            <h2>🔮 Projection MRR Conservatrice (12 mois)</h2>
             <p style="color: var(--muted); font-size: 0.85rem; margin-bottom: 1rem;">
-                Basé sur la croissance moyenne MoM des 4 derniers mois (~21%)
+                Basé sur la croissance récente MoM (~11% — tendance Déc/Jan)
             </p>
             <div class="chart-container" style="height: 300px;">
                 <canvas id="projectionChart"></canvas>
@@ -724,19 +724,19 @@
                 </div>
                 <div style="text-align: center; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 8px;">
                     <div style="font-size: 0.75rem; color: var(--muted); text-transform: uppercase;">MRR +6 mois</div>
-                    <div style="font-size: 1.5rem; font-weight: 700; color: var(--success);">$16,847</div>
+                    <div style="font-size: 1.5rem; font-weight: 700; color: var(--success);">$10,030</div>
                 </div>
                 <div style="text-align: center; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 8px;">
                     <div style="font-size: 0.75rem; color: var(--muted); text-transform: uppercase;">MRR +12 mois</div>
-                    <div style="font-size: 1.5rem; font-weight: 700; color: var(--success);">$52,900</div>
+                    <div style="font-size: 1.5rem; font-weight: 700; color: var(--success);">$18,760</div>
                 </div>
-                <div style="text-align: center; padding: 1rem; background: rgba(245, 158, 11, 0.1); border-radius: 8px;">
+                <div style="text-align: center; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 8px;">
                     <div style="font-size: 0.75rem; color: var(--muted); text-transform: uppercase;">ARR Projeté</div>
-                    <div style="font-size: 1.5rem; font-weight: 700; color: var(--warning);">$634K</div>
+                    <div style="font-size: 1.5rem; font-weight: 700; color: var(--success);">$225K</div>
                 </div>
             </div>
             <p style="color: var(--muted); font-size: 0.75rem; margin-top: 1rem; font-style: italic;">
-                ⚠️ Projection optimiste basée sur croissance constante. Le taux a ralenti récemment (10-12% vs 30%+ avant).
+                📊 Projection conservatrice basée sur le taux de croissance récent (11% MoM vs 21% historique)
             </p>
         </div>
 
@@ -837,14 +837,14 @@
             options: chartConfig
         });
 
-        // MRR Projection Chart
-        // Growth rates: Sept→Oct: 30.7%, Oct→Nov: 32.4%, Nov→Dec: 10.3%, Dec→Jan: 12.5%
-        // Average MoM growth: ~21%
+        // MRR Projection Chart - Conservative
+        // Recent growth rates: Nov→Dec: 10.3%, Dec→Jan: 12.5%
+        // Conservative MoM growth: ~11%
         const projectionMonths = ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sept', 'Oct', 'Nov', 'Déc', 'Jan 27'];
-        const avgGrowth = 0.21;
+        const conservativeGrowth = 0.11;
         const projectedMRR = [5362];
         for (let i = 1; i < 13; i++) {
-            projectedMRR.push(Math.round(projectedMRR[i-1] * (1 + avgGrowth)));
+            projectedMRR.push(Math.round(projectedMRR[i-1] * (1 + conservativeGrowth)));
         }
         
         new Chart(document.getElementById('projectionChart'), {
@@ -852,7 +852,7 @@
             data: {
                 labels: projectionMonths,
                 datasets: [{
-                    label: 'MRR Projeté (21% MoM)',
+                    label: 'MRR Projeté (11% MoM)',
                     data: projectedMRR,
                     borderColor: '#10b981',
                     backgroundColor: 'rgba(16, 185, 129, 0.1)',
