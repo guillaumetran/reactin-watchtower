@@ -1,17 +1,17 @@
 {
   "lastUpdated": "2026-02-06",
   "kpis": {
-    "mrr": 5362,
-    "mrrChange": 0,
-    "paidSubs": 100,
-    "paidSubsChange": 0,
-    "arpu": 54,
-    "arpuChange": 0,
+    "mrr": 5725,
+    "mrrChange": 5,
+    "paidSubs": 105,
+    "paidSubsChange": 5,
+    "arpu": 55,
+    "arpuChange": 2,
     "seoImpressions": 61305,
     "seoImpressionsChange": 115,
     "signups": 22,
     "signupsChange": -76,
-    "nrr": 89
+    "nrr": 105
   },
   "funnel": {
     "signups": 22,
@@ -35,12 +35,20 @@
     "messagesSent": 2043
   },
   "revenueBreakdown": {
-    "newBusiness": 888,
+    "newBusiness": 301,
+    "expansion": 39,
+    "reactivation": 18,
+    "contraction": 0,
+    "churn": -64,
+    "net": 294
+  },
+  "revenueBreakdownJan": {
+    "newBusiness": 957,
     "expansion": 370,
     "reactivation": 232,
     "contraction": -207,
     "churn": -686,
-    "net": 597
+    "net": 666
   },
   "trafficSources": [
     { "name": "Google", "count": 103 },
@@ -64,27 +72,27 @@
   },
   "history": {
     "months": ["Sept", "Oct", "Nov", "Déc", "Jan", "Feb MTD"],
-    "mrr": [2497, 3264, 4322, 4765, 5362, null],
-    "paidSubs": [72, 80, 86, 92, 100, null],
+    "mrr": [2497, 3264, 4322, 4765, 5431, 5725],
+    "paidSubs": [72, 80, 86, 92, 100, 105],
     "seoImpressions": [15626, 10344, 12161, 10709, 28451, 61305],
     "lpViews": [null, 3400, 1900, 2000, 2200, 333],
     "lpConversion": [null, 3.9, 5.8, 3.45, 4.1, null],
     "signups": [92, 134, 110, 69, 90, 22],
     "activationRate": [62, 65, 78, null, 54, 50],
-    "arpu": [null, 41, 50, 52, 54, null],
-    "churn": [8, 7, 15, 10, 12, null]
+    "arpu": [null, 41, 50, 52, 54, 55],
+    "churn": [8, 7, 15, 10, 12, 2]
   },
   "alerts": {
     "wins": [
+      { "title": "🔥 Feb démarre fort", "text": "+$294 MRR en 6 jours (projection ~$1.5K/mois)" },
       { "title": "📈 LinkedIn Connected UP", "text": "86% vs 63% en Jan — meilleur onboarding !" },
       { "title": "📉 Bounce Rate DOWN", "text": "80.7% vs 84.1% — engagement amélioré" },
-      { "title": "🎬 YouTube apparaît", "text": "Nouveau channel de traffic à tracker" },
-      { "title": "🇫🇷 France domine SEO", "text": "27% CTR vs 0.28% US — forte traction locale" }
+      { "title": "📉 Churn DOWN", "text": "2 churns vs 12 en Jan — rétention améliorée" }
     ],
     "warnings": [
       { "title": "⚠️ 0 Premium en 6 jours", "text": "Normal early month mais à surveiller" },
       { "title": "⚠️ US SEO faible", "text": "25K impressions mais 0.28% CTR seulement" }
     ]
   },
-  "note": "Feb MTD = 6 premiers jours. Projections: ~110 signups, ~1665 visitors"
+  "note": "Feb MTD = 6 premiers jours. MRR actuel: $5,725. Projection Feb: ~$1,470 net growth"
 }
