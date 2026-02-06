@@ -1,25 +1,38 @@
 {
-  "lastUpdated": "2026-01-30",
+  "lastUpdated": "2026-02-06",
   "kpis": {
     "mrr": 5362,
-    "mrrChange": 13,
+    "mrrChange": 0,
     "paidSubs": 100,
-    "paidSubsChange": 8,
+    "paidSubsChange": 0,
     "arpu": 54,
-    "arpuChange": 4,
-    "seoImpressions": 28451,
-    "seoImpressionsChange": 166,
-    "signups": 90,
-    "signupsChange": 30,
+    "arpuChange": 0,
+    "seoImpressions": 61305,
+    "seoImpressionsChange": 115,
+    "signups": 22,
+    "signupsChange": -76,
     "nrr": 89
   },
   "funnel": {
-    "signups": 90,
-    "linkedinConnected": 57,
-    "listCreated": 57,
-    "campaignCreated": 49,
-    "campaignRunning": 41,
-    "premium": 12
+    "signups": 22,
+    "linkedinConnected": 19,
+    "listCreated": 13,
+    "campaignCreated": 11,
+    "campaignRunning": 8,
+    "premium": 0
+  },
+  "funnelRates": {
+    "linkedinConnectedRate": 86,
+    "listCreatedRate": 59,
+    "campaignCreatedRate": 50,
+    "campaignRunningRate": 36,
+    "premiumRate": 0
+  },
+  "activity": {
+    "listsCreated": 107,
+    "campaignsCreated": 65,
+    "requestsSent": 8223,
+    "messagesSent": 2043
   },
   "revenueBreakdown": {
     "newBusiness": 888,
@@ -30,33 +43,48 @@
     "net": 597
   },
   "trafficSources": [
-    { "name": "Google", "count": 453 },
-    { "name": "LinkedIn", "count": 309 },
-    { "name": "Twitter", "count": 65 },
-    { "name": "OnePageLove", "count": 37 }
+    { "name": "Google", "count": 103 },
+    { "name": "LinkedIn", "count": 15 },
+    { "name": "YouTube", "count": 4 },
+    { "name": "OnePageLove", "count": 3 },
+    { "name": "Twitter", "count": 3 }
   ],
+  "traffic": {
+    "uniqueVisitors": 333,
+    "pageviews": 508,
+    "bounceRate": 80.7,
+    "avgSession": "2m41s"
+  },
+  "seo": {
+    "impressions": 61305,
+    "clicks": 1341,
+    "ctr": 2.19,
+    "topGeo": "France",
+    "topGeoCtr": 27
+  },
   "history": {
-    "months": ["Sept", "Oct", "Nov", "Déc", "Jan"],
-    "mrr": [2497, 3264, 4322, 4765, 5362],
-    "paidSubs": [72, 80, 86, 92, 100],
-    "seoImpressions": [15626, 10344, 12161, 10709, 28451],
-    "lpViews": [null, 3400, 1900, 2000, 2200],
-    "lpConversion": [null, 3.9, 5.8, 3.45, 4.1],
-    "signups": [92, 134, 110, 69, 90],
-    "activationRate": [62, 65, 78, null, 54],
-    "arpu": [null, 41, 50, 52, 54],
-    "churn": [8, 7, 15, 10, 12]
+    "months": ["Sept", "Oct", "Nov", "Déc", "Jan", "Feb MTD"],
+    "mrr": [2497, 3264, 4322, 4765, 5362, null],
+    "paidSubs": [72, 80, 86, 92, 100, null],
+    "seoImpressions": [15626, 10344, 12161, 10709, 28451, 61305],
+    "lpViews": [null, 3400, 1900, 2000, 2200, 333],
+    "lpConversion": [null, 3.9, 5.8, 3.45, 4.1, null],
+    "signups": [92, 134, 110, 69, 90, 22],
+    "activationRate": [62, 65, 78, null, 54, 50],
+    "arpu": [null, 41, 50, 52, 54, null],
+    "churn": [8, 7, 15, 10, 12, null]
   },
   "alerts": {
     "wins": [
-      { "title": "🚀 SEO Explosion", "text": "Impressions x2.6 en janvier. Quelque chose rank très fort !" },
-      { "title": "🎉 100 Paid Subs", "text": "Milestone atteint ! La croissance continue." },
-      { "title": "📈 Expansion Revenue", "text": "$370 d'expansion ce mois — les users upgradent." }
+      { "title": "📈 LinkedIn Connected UP", "text": "86% vs 63% en Jan — meilleur onboarding !" },
+      { "title": "📉 Bounce Rate DOWN", "text": "80.7% vs 84.1% — engagement amélioré" },
+      { "title": "🎬 YouTube apparaît", "text": "Nouveau channel de traffic à tracker" },
+      { "title": "🇫🇷 France domine SEO", "text": "27% CTR vs 0.28% US — forte traction locale" }
     ],
     "warnings": [
-      { "title": "⚠️ CTR en chute", "text": "4.5% → 1.5%. Meta descriptions à revoir." },
-      { "title": "⚠️ Activation baisse", "text": "78% → 54% créent des campagnes. Onboarding à checker." },
-      { "title": "⚠️ NRR < 100%", "text": "89% de rétention nette. Le churn érode la base." }
+      { "title": "⚠️ 0 Premium en 6 jours", "text": "Normal early month mais à surveiller" },
+      { "title": "⚠️ US SEO faible", "text": "25K impressions mais 0.28% CTR seulement" }
     ]
-  }
+  },
+  "note": "Feb MTD = 6 premiers jours. Projections: ~110 signups, ~1665 visitors"
 }
