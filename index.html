@@ -847,11 +847,11 @@
         // MRR Projection Chart - Conservative + Objectives
         const projectionMonths = ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sept', 'Oct', 'Nov', 'Déc'];
         
-        // Conservative projection (11% MoM)
+        // Conservative projection (11% MoM) starting from Feb actual
         const conservativeGrowth = 0.11;
-        const projectedMRR = [5431, 5725];
-        for (let i = 1; i < 12; i++) {
-            projectedMRR.push(Math.round(projectedMRR[i-1] * (1 + conservativeGrowth)));
+        const projectedMRR = [5431, 5725]; // Jan, Feb actual
+        for (let i = 2; i < 12; i++) {
+            projectedMRR.push(Math.round(projectedMRR[projectedMRR.length - 1] * (1 + conservativeGrowth)));
         }
         
         // Objectives
