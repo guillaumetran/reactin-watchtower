@@ -493,17 +493,11 @@
                 <div class="kpi-label">NRR (Jan) <span class="info-icon">ⓘ</span></div>
                 <div class="kpi-value">89%</div>
                 <div class="kpi-change warning">⚠️ &lt; 100%</div>
-                <div class="tooltip tooltip-wide">
-                    <strong>Net Revenue Retention (NRR) - Janvier</strong><br><br>
-                    Mesure la rétention des <strong>clients existants uniquement</strong><br>(exclut New Business &amp; Reactivations)<br><br>
-                    <strong>Calcul :</strong><br>
-                    <code>MRR fin Déc :     $4,765<br>+ Expansion :     +$370<br>- Contraction :   -$207<br>- Churn :         -$686<br>―――――――――――――――――――<br>Retenu :          $4,242<br>NRR = $4,242 / $4,765 = <strong>89%</strong></code><br><br>
-                    <strong>Pourquoi le MRR total = $5,725 ?</strong><br>
-                    <code>Retenu :          $4,242<br>+ New Business :  +$301<br>+ Reactivations : +$18<br>―――――――――――――――――――<br>MRR Février :     $5,725</code><br><br>
-                    <strong>Interprétation :</strong><br>
-                    • <strong>&gt; 100%</strong> = clients existants génèrent plus ✓<br>
-                    • <strong>&lt; 100%</strong> = on perd du revenu sur la base existante ⚠️<br><br>
-                    <em>À 89%, on perd 11%/mois sur les clients existants.<br>Le New Biz compense, mais c'est un warning.</em>
+                <div class="tooltip">
+                    <strong>NRR Janvier = 89%</strong><br><br>
+                    Rétention clients existants (hors new biz)<br><br>
+                    &gt;100% = expansion &gt; churn ✓<br>
+                    &lt;100% = churn &gt; expansion ⚠️
                 </div>
             </div>
         </div>
@@ -647,7 +641,7 @@
                         </tr>
                         <tr>
                             <td>LP Views</td>
-                            <td>—</td>
+                            <td>-</td>
                             <td>~3,400</td>
                             <td>~1,900</td>
                             <td>~2,000</td>
@@ -656,12 +650,12 @@
                         </tr>
                         <tr>
                             <td>LP Conversion</td>
-                            <td>—</td>
+                            <td>-</td>
                             <td>3.9%</td>
                             <td>5.8%</td>
                             <td>3.45%</td>
                             <td>4.1%</td>
-                            <td class="highlight-cell">—</td>
+                            <td class="highlight-cell">-</td>
                         </tr>
                         <tr>
                             <td>Signups</td>
@@ -677,7 +671,7 @@
                             <td>62%</td>
                             <td>65%</td>
                             <td>78%</td>
-                            <td>—</td>
+                            <td>-</td>
                             <td>54%</td>
                             <td class="highlight-cell">50%</td>
                         </tr>
@@ -692,7 +686,7 @@
                         </tr>
                         <tr>
                             <td>Paid Subs</td>
-                            <td>—</td>
+                            <td>-</td>
                             <td>80</td>
                             <td>86</td>
                             <td>92</td>
@@ -701,7 +695,7 @@
                         </tr>
                         <tr>
                             <td>ARPU</td>
-                            <td>—</td>
+                            <td>-</td>
                             <td>$41</td>
                             <td>$50</td>
                             <td>$52</td>
@@ -726,7 +720,7 @@
         <div class="card" style="margin-bottom: 1.5rem;">
             <h2>🔮 Projection MRR Conservatrice (12 mois)</h2>
             <p style="color: var(--muted); font-size: 0.85rem; margin-bottom: 1rem;">
-                Basé sur la croissance récente MoM (~11% — tendance récente)
+                Basé sur la croissance récente MoM (~11% - moyenne Oct-Jan)
             </p>
             <div class="chart-container" style="height: 300px;">
                 <canvas id="projectionChart"></canvas>
@@ -762,20 +756,17 @@
             </div>
             <div class="alert success">
                 <strong>🎉 LinkedIn Connected UP 📈</strong>
-                86% vs 63% en Jan — meilleur onboarding !
+                86% vs 63% en Jan - meilleur onboarding !
             </div>
             <div class="alert success">
                 <strong>📈 Churn DOWN 📉</strong>
-                Seulement 2 churns vs 12 en Jan — rétention améliorée.
+                Seulement 2 churns vs 12 en Jan - rétention améliorée.
             </div>
             <div class="alert warning">
                 <strong>⚠️ 0 Premium en 6 jours</strong>
-                Normal avec le trial 7j — à surveiller mi-février.
+                Normal avec le trial 7j - à surveiller mi-février.
             </div>
             <div class="alert warning">
-                <strong>⚠️ US SEO faible</strong>
-                25K impressions mais 0.28% CTR. Focus France pour l'instant.
-            </div>
             <div class="alert warning">
                 <strong>⚠️ NRR &lt; 100%</strong>
                 89% de rétention nette. Le churn érode la base existante.
