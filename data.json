@@ -1,46 +1,46 @@
 {
-  "lastUpdated": "2026-02-06",
+  "lastUpdated": "2026-02-13",
   "kpis": {
-    "mrr": 5725,
-    "mrrChange": 5,
-    "paidSubs": 105,
-    "paidSubsChange": 5,
-    "arpu": 55,
-    "arpuChange": 2,
-    "seoImpressions": 61305,
-    "seoImpressionsChange": 115,
-    "signups": 22,
-    "signupsChange": -76,
-    "nrr": 105
+    "mrr": 5889,
+    "mrrChange": 8,
+    "paidSubs": 111,
+    "paidSubsChange": 11,
+    "arpu": 53,
+    "arpuChange": -2,
+    "seoImpressions": 10867,
+    "seoImpressionsChange": 38,
+    "signups": 48,
+    "signupsChange": 118,
+    "nrr": 89
   },
   "funnel": {
-    "signups": 22,
-    "linkedinConnected": 19,
-    "listCreated": 13,
-    "campaignCreated": 11,
-    "campaignRunning": 8,
-    "premium": 0
+    "signups": 48,
+    "linkedinConnected": 37,
+    "listCreated": 34,
+    "campaignCreated": 29,
+    "campaignRunning": 22,
+    "premium": 5
   },
   "funnelRates": {
-    "linkedinConnectedRate": 86,
-    "listCreatedRate": 59,
-    "campaignCreatedRate": 50,
-    "campaignRunningRate": 36,
-    "premiumRate": 0
+    "linkedinConnectedRate": 77,
+    "listCreatedRate": 71,
+    "campaignCreatedRate": 60,
+    "campaignRunningRate": 46,
+    "premiumRate": 10
   },
   "activity": {
-    "listsCreated": 107,
-    "campaignsCreated": 65,
-    "requestsSent": 8223,
-    "messagesSent": 2043
+    "listsCreated": 500,
+    "campaignsCreated": 175,
+    "requestsSent": 20000,
+    "messagesSent": 5500
   },
   "revenueBreakdown": {
-    "newBusiness": 301,
-    "expansion": 39,
+    "newBusiness": 668,
+    "expansion": 130,
     "reactivation": 18,
     "contraction": 0,
-    "churn": -64,
-    "net": 294
+    "churn": -301,
+    "net": 458
   },
   "revenueBreakdownJan": {
     "newBusiness": 957,
@@ -51,48 +51,48 @@
     "net": 666
   },
   "trafficSources": [
-    { "name": "Google", "count": 103 },
-    { "name": "LinkedIn", "count": 15 },
-    { "name": "YouTube", "count": 4 },
-    { "name": "OnePageLove", "count": 3 },
-    { "name": "Twitter", "count": 3 }
+    { "name": "Google", "count": 213 },
+    { "name": "LinkedIn", "count": 35 },
+    { "name": "Lovable", "count": 16 },
+    { "name": "OnePageLove", "count": 8 },
+    { "name": "ChatGPT", "count": 7 }
   ],
   "traffic": {
-    "uniqueVisitors": 333,
-    "pageviews": 508,
-    "bounceRate": 80.7,
-    "avgSession": "2m41s"
+    "uniqueVisitors": 784,
+    "pageviews": 1200,
+    "bounceRate": 80.6,
+    "avgSession": "2m45s"
   },
   "seo": {
-    "impressions": 61305,
-    "clicks": 1341,
-    "ctr": 2.19,
+    "impressions": 10867,
+    "clicks": 157,
+    "ctr": 1.45,
     "topGeo": "France",
     "topGeoCtr": 27
   },
   "history": {
     "months": ["Sept", "Oct", "Nov", "Déc", "Jan", "Feb MTD"],
-    "mrr": [2497, 3264, 4322, 4765, 5431, 5725],
-    "paidSubs": [72, 80, 86, 92, 100, 105],
-    "seoImpressions": [15626, 10344, 12161, 10709, 28451, 61305],
-    "lpViews": [null, 3400, 1900, 2000, 2200, 333],
-    "lpConversion": [null, 3.9, 5.8, 3.45, 4.1, null],
-    "signups": [92, 134, 110, 69, 90, 22],
-    "activationRate": [62, 65, 78, null, 54, 50],
-    "arpu": [null, 41, 50, 52, 54, 55],
-    "churn": [8, 7, 15, 10, 12, 2]
+    "mrr": [2497, 3264, 4322, 4765, 5431, 5889],
+    "paidSubs": [72, 80, 86, 92, 100, 111],
+    "seoImpressions": [15626, 10344, 12161, 10709, 28451, 10867],
+    "lpViews": [null, 3400, 1900, 2000, 2200, 784],
+    "lpConversion": [null, 3.9, 5.8, 3.45, 4.1, 6.1],
+    "signups": [92, 134, 110, 69, 90, 48],
+    "activationRate": [62, 65, 78, null, 54, 46],
+    "arpu": [null, 41, 50, 52, 54, 53],
+    "churn": [8, 7, 15, 10, 12, 6]
   },
   "alerts": {
     "wins": [
-      { "title": "🔥 Feb démarre fort", "text": "+$294 MRR en 6 jours (projection ~$1.5K/mois)" },
-      { "title": "📈 LinkedIn Connected UP", "text": "86% vs 63% en Jan — meilleur onboarding !" },
-      { "title": "📉 Bounce Rate DOWN", "text": "80.7% vs 84.1% — engagement amélioré" },
-      { "title": "📉 Churn DOWN", "text": "2 churns vs 12 en Jan — rétention améliorée" }
+      { "title": "🔥 Feb démarre fort", "text": "+$458 MRR en 13 jours ! Projection ~$1.5K net ce mois." },
+      { "title": "🎉 5 Premiums !", "text": "Premières conversions de Feb — trials début de mois qui convertissent." },
+      { "title": "📈 Signups x2", "text": "48 signups vs 22 le 6 Feb — acquisition en hausse !" },
+      { "title": "📉 Churn DOWN", "text": "Seulement 6 churns vs 12 en Jan — rétention améliorée." }
     ],
     "warnings": [
-      { "title": "⚠️ 0 Premium en 6 jours", "text": "Normal early month mais à surveiller" },
-      { "title": "⚠️ US SEO faible", "text": "25K impressions mais 0.28% CTR seulement" }
+      { "title": "⚠️ NRR < 100%", "text": "89% de rétention nette. Le churn érode la base existante." },
+      { "title": "⚠️ LI Connected ↓", "text": "77% vs 86% le 6 Feb — surveiller l'onboarding." }
     ]
   },
-  "note": "Feb MTD = 6 premiers jours. MRR actuel: $5,725. Projection Feb: ~$1,470 net growth"
+  "note": "Feb MTD = 13 jours. MRR actuel: $5,889. 111 paid subs (TrustMRR). 5 conversions Premium ce mois !"
 }
