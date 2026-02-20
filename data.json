@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-13",
+  "lastUpdated": "2026-02-20",
   "kpis": {
     "mrr": 5889,
     "mrrChange": 8,
@@ -7,39 +7,39 @@
     "paidSubsChange": 11,
     "arpu": 53,
     "arpuChange": -2,
-    "seoImpressions": 10867,
-    "seoImpressionsChange": 38,
-    "signups": 48,
-    "signupsChange": 118,
-    "nrr": 89
+    "seoImpressions": 17013,
+    "seoImpressionsChange": 57,
+    "signups": 91,
+    "signupsChange": 1,
+    "nrr": 94
   },
   "funnel": {
-    "signups": 48,
-    "linkedinConnected": 37,
-    "listCreated": 34,
-    "campaignCreated": 29,
-    "campaignRunning": 22,
-    "premium": 5
+    "signups": 91,
+    "linkedinConnected": 63,
+    "listCreated": 63,
+    "campaignCreated": 51,
+    "campaignRunning": 40,
+    "premium": 7
   },
   "funnelRates": {
-    "linkedinConnectedRate": 77,
-    "listCreatedRate": 71,
-    "campaignCreatedRate": 60,
-    "campaignRunningRate": 46,
-    "premiumRate": 10
+    "linkedinConnectedRate": 69,
+    "listCreatedRate": 69,
+    "campaignCreatedRate": 56,
+    "campaignRunningRate": 44,
+    "premiumRate": 8
   },
   "activity": {
-    "listsCreated": 500,
-    "campaignsCreated": 175,
-    "requestsSent": 20000,
-    "messagesSent": 5500
+    "listsCreated": 623,
+    "campaignsCreated": 255,
+    "requestsSent": 33000,
+    "messagesSent": 7000
   },
   "revenueBreakdown": {
-    "newBusiness": 668,
-    "expansion": 130,
+    "newBusiness": 767,
+    "expansion": 74,
     "reactivation": 18,
     "contraction": 0,
-    "churn": -301,
+    "churn": -400,
     "net": 458
   },
   "revenueBreakdownJan": {
@@ -51,22 +51,22 @@
     "net": 666
   },
   "trafficSources": [
-    { "name": "Google", "count": 213 },
-    { "name": "LinkedIn", "count": 35 },
-    { "name": "Lovable", "count": 16 },
-    { "name": "OnePageLove", "count": 8 },
-    { "name": "ChatGPT", "count": 7 }
+    { "name": "Google", "count": 393 },
+    { "name": "LinkedIn", "count": 214 },
+    { "name": "Lovable", "count": 18 },
+    { "name": "OnePageLove", "count": 13 },
+    { "name": "ChatGPT", "count": 11 }
   ],
   "traffic": {
-    "uniqueVisitors": 784,
-    "pageviews": 1200,
-    "bounceRate": 80.6,
-    "avgSession": "2m45s"
+    "uniqueVisitors": 1600,
+    "pageviews": 2400,
+    "bounceRate": 81.2,
+    "avgSession": "2m16s"
   },
   "seo": {
-    "impressions": 10867,
-    "clicks": 157,
-    "ctr": 1.45,
+    "impressions": 17013,
+    "clicks": 291,
+    "ctr": 1.71,
     "topGeo": "France",
     "topGeoCtr": 27
   },
@@ -74,25 +74,26 @@
     "months": ["Sept", "Oct", "Nov", "Déc", "Jan", "Feb MTD"],
     "mrr": [2497, 3264, 4322, 4765, 5431, 5889],
     "paidSubs": [72, 80, 86, 92, 100, 111],
-    "seoImpressions": [15626, 10344, 12161, 10709, 28451, 10867],
-    "lpViews": [null, 3400, 1900, 2000, 2200, 784],
-    "lpConversion": [null, 3.9, 5.8, 3.45, 4.1, 6.1],
-    "signups": [92, 134, 110, 69, 90, 48],
-    "activationRate": [62, 65, 78, null, 54, 46],
+    "seoImpressions": [15626, 10344, 12161, 10709, 34814, 17013],
+    "lpViews": [null, 3400, 1900, 2000, 2200, 1600],
+    "lpConversion": [null, 3.9, 5.8, 3.45, 4.1, 5.7],
+    "signups": [92, 134, 110, 69, 90, 91],
+    "activationRate": [62, 65, 78, null, 54, 44],
     "arpu": [null, 41, 50, 52, 54, 53],
-    "churn": [8, 7, 15, 10, 12, 6]
+    "churn": [8, 7, 15, 10, 12, 8]
   },
   "alerts": {
     "wins": [
-      { "title": "🔥 Feb démarre fort", "text": "+$458 MRR en 13 jours ! Projection ~$1.5K net ce mois." },
-      { "title": "🎉 5 Premiums !", "text": "Premières conversions de Feb — trials début de mois qui convertissent." },
-      { "title": "📈 Signups x2", "text": "48 signups vs 22 le 6 Feb — acquisition en hausse !" },
-      { "title": "📉 Churn DOWN", "text": "Seulement 6 churns vs 12 en Jan — rétention améliorée." }
+      { "title": "📈 91 signups!", "text": "Déjà plus que tout Janvier (90) — acquisition en feu 🔥" },
+      { "title": "🎉 7 Premiums", "text": "8% conversion rate — 2 de plus que le 13 Feb !" },
+      { "title": "💰 +$458 net MRR", "text": "Même tendance qu'il y a une semaine. Projection ~$700 net ce mois." },
+      { "title": "🔍 SEO CTR ↑", "text": "1.71% vs 1.45% mi-Feb — meilleur click-through !" }
     ],
     "warnings": [
-      { "title": "⚠️ NRR < 100%", "text": "89% de rétention nette. Le churn érode la base existante." },
-      { "title": "⚠️ LI Connected ↓", "text": "77% vs 86% le 6 Feb — surveiller l'onboarding." }
+      { "title": "⚠️ Bounce 81.2%", "text": "En légère hausse vs 80.6%. Landing page à optimiser ?" },
+      { "title": "⚠️ Activation ↓", "text": "44% campaign running vs 46% mi-Feb. Surveiller l'onboarding." },
+      { "title": "⚠️ 8 churns", "text": "$400 lost MRR — 2 de plus que mi-Feb. Retention focus needed." }
     ]
   },
-  "note": "Feb MTD = 13 jours. MRR actuel: $5,889. 111 paid subs (TrustMRR). 5 conversions Premium ce mois !"
+  "note": "Feb MTD = 20 jours. MRR: $5,889. 111 paid subs. 7 conversions Premium. Jan SEO corrigé: 34,814 impressions."
 }
