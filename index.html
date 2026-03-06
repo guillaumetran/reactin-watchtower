@@ -85,9 +85,15 @@
         
         .kpi-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
             gap: 1rem;
             margin-bottom: 2rem;
+        }
+        
+        @media (min-width: 1200px) {
+            .kpi-grid.kpi-7 {
+                grid-template-columns: repeat(7, 1fr);
+            }
         }
         
         .kpi-card {
@@ -469,7 +475,7 @@
         </header>
 
         <!-- KPI Cards -->
-        <div class="kpi-grid">
+        <div class="kpi-grid kpi-7">
             <div class="kpi-card highlight">
                 <div class="kpi-label">MRR</div>
                 <div class="kpi-value">$5,678</div>
