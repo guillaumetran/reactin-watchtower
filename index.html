@@ -312,6 +312,12 @@
             color: #fcd34d;
         }
         
+        .alert.danger {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #fca5a5;
+        }
+        
         .alert strong { display: block; margin-bottom: 0.25rem; }
         
         .traffic-sources {
@@ -459,45 +465,56 @@
     <div id="dashboard" class="container">
         <header>
             <h1>🔭 ReactIn Growth Watchtower</h1>
-            <span class="date">Mis à jour le 27 Février 2026</span>
+            <span class="date">Mis à jour le 6 Mars 2026</span>
         </header>
 
         <!-- KPI Cards -->
         <div class="kpi-grid">
             <div class="kpi-card highlight">
                 <div class="kpi-label">MRR</div>
-                <div class="kpi-value">$5,945</div>
-                <div class="kpi-change positive">+9% vs Jan</div>
+                <div class="kpi-value">$5,678</div>
+                <div class="kpi-change positive">+5% vs Jan</div>
             </div>
             <div class="kpi-card">
                 <div class="kpi-label">Paid Subscribers</div>
-                <div class="kpi-value">113 🎉</div>
-                <div class="kpi-change positive">+13 ce mois</div>
+                <div class="kpi-value">107</div>
+                <div class="kpi-change positive">+7 vs Jan</div>
             </div>
             <div class="kpi-card">
                 <div class="kpi-label">ARPU</div>
                 <div class="kpi-value">$53</div>
-                <div class="kpi-change negative">-$1 vs Jan</div>
+                <div class="kpi-change warning">stable</div>
             </div>
             <div class="kpi-card">
                 <div class="kpi-label">SEO Impressions</div>
-                <div class="kpi-value">29,673</div>
-                <div class="kpi-change positive">+74% vs Feb 20 🔥</div>
+                <div class="kpi-value">39,791</div>
+                <div class="kpi-change positive">+34% vs Jan 🔥</div>
             </div>
             <div class="kpi-card">
                 <div class="kpi-label">Signups</div>
                 <div class="kpi-value">109</div>
-                <div class="kpi-change positive">MTD (27j) 🔥</div>
+                <div class="kpi-change positive">+21% vs Jan 🔥</div>
             </div>
             <div class="kpi-card has-tooltip">
                 <div class="kpi-label">NRR (Feb) <span class="info-icon">ⓘ</span></div>
-                <div class="kpi-value">91%</div>
+                <div class="kpi-value">85%</div>
                 <div class="kpi-change warning">⚠️ &lt; 100%</div>
                 <div class="tooltip">
-                    <strong>NRR Janvier = 89%</strong><br><br>
-                    Rétention clients existants (hors new biz)<br><br>
+                    <strong>Net Revenue Retention</strong><br><br>
+                    Churn: 15 users / -$801<br><br>
                     &gt;100% = expansion &gt; churn ✓<br>
                     &lt;100% = churn &gt; expansion ⚠️
+                </div>
+            </div>
+            <div class="kpi-card has-tooltip">
+                <div class="kpi-label">Score GEO <span class="info-icon">ⓘ</span></div>
+                <div class="kpi-value">2</div>
+                <div class="kpi-change positive">AI referrals 🤖</div>
+                <div class="tooltip">
+                    <strong>AI Referral Sources</strong><br><br>
+                    ChatGPT: 1<br>
+                    Gemini: 1<br><br>
+                    Tracks mentions/referrals from AI assistants
                 </div>
             </div>
         </div>
@@ -521,7 +538,7 @@
         <!-- Funnel & Breakdown -->
         <div class="grid-2">
             <div class="card">
-                <h2>🎯 Activation Funnel (Février MTD)</h2>
+                <h2>🎯 Activation Funnel (Février)</h2>
                 <div class="funnel">
                     <div class="funnel-step">
                         <span class="funnel-label">Signups</span>
@@ -550,61 +567,86 @@
                     </div>
                     <div class="funnel-step">
                         <span class="funnel-label">Premium</span>
-                        <div class="funnel-bar" style="width: 11%; background: var(--success);">12</div>
-                        <span class="funnel-pct">11% 🔥</span>
+                        <div class="funnel-bar" style="width: 12%; background: var(--success);">13</div>
+                        <span class="funnel-pct">12% 🔥</span>
                     </div>
                 </div>
             </div>
             <div class="card">
-                <h2>💰 Revenue Breakdown (Février MTD)</h2>
+                <h2>💰 Revenue Breakdown (Février)</h2>
                 <div class="breakdown-grid">
                     <div class="breakdown-item positive">
-                        <span class="label">🆕 New Business</span>
-                        <span class="value">+$995</span>
+                        <span class="label">🆕 New Premium</span>
+                        <span class="value">+13</span>
                     </div>
                     <div class="breakdown-item positive">
-                        <span class="label">📈 Expansion</span>
-                        <span class="value">+$74</span>
-                    </div>
-                    <div class="breakdown-item positive">
-                        <span class="label">🔄 Reactivation</span>
-                        <span class="value">+$18</span>
+                        <span class="label">📊 Conversion</span>
+                        <span class="value">12%</span>
                     </div>
                     <div class="breakdown-item negative">
-                        <span class="label">📉 Contraction</span>
-                        <span class="value">-$39</span>
+                        <span class="label">❌ Churned Users</span>
+                        <span class="value">-15</span>
                     </div>
                     <div class="breakdown-item negative">
-                        <span class="label">❌ Churn</span>
-                        <span class="value">-$534</span>
+                        <span class="label">💸 Churned MRR</span>
+                        <span class="value">-$801</span>
                     </div>
                     <div class="breakdown-item" style="grid-column: span 2; background: rgba(99, 102, 241, 0.1);">
                         <span class="label" style="font-weight: 600;">Net MRR Movement</span>
-                        <span class="value" style="color: var(--success); font-size: 1.25rem;">+$514</span>
+                        <span class="value" style="color: var(--success); font-size: 1.25rem;">+$247</span>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mars MTD Card -->
+        <div class="card" style="margin-bottom: 1.5rem; border-color: var(--primary);">
+            <h2>📅 Mars MTD (1-6)</h2>
+            <div class="kpi-grid" style="margin-bottom: 0;">
+                <div class="kpi-card">
+                    <div class="kpi-label">MRR</div>
+                    <div class="kpi-value">$5,682</div>
+                    <div class="kpi-change positive">+$4 vs Feb close</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Paid Subs</div>
+                    <div class="kpi-value">107</div>
+                    <div class="kpi-change warning">stable</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">SEO Impressions</div>
+                    <div class="kpi-value">9,036</div>
+                    <div class="kpi-change positive">3 jours</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Visitors</div>
+                    <div class="kpi-value">445</div>
+                    <div class="kpi-change positive">MTD</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Signups</div>
+                    <div class="kpi-value">14</div>
+                    <div class="kpi-change positive">MTD</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Activation</div>
+                    <div class="kpi-value">93%</div>
+                    <div class="kpi-change positive">LI connected 🔥</div>
                 </div>
             </div>
         </div>
 
         <!-- Traffic Sources -->
         <div class="card" style="margin-bottom: 1.5rem;">
-            <h2>🌐 Traffic Sources (Février MTD)</h2>
+            <h2>🌐 Traffic Sources (Février)</h2>
             <div class="traffic-sources">
                 <div class="source-badge">
-                    <span>Google</span>
-                    <span class="count">557</span>
+                    <span>SEO Clicks</span>
+                    <span class="count">550</span>
                 </div>
                 <div class="source-badge">
-                    <span>LinkedIn</span>
-                    <span class="count">322</span>
-                </div>
-                <div class="source-badge">
-                    <span>OnePageLove</span>
-                    <span class="count">28</span>
-                </div>
-                <div class="source-badge">
-                    <span>YouTube</span>
-                    <span class="count">20</span>
+                    <span>Visitors</span>
+                    <span class="count">2,450</span>
                 </div>
             </div>
         </div>
@@ -617,113 +659,122 @@
                     <thead>
                         <tr>
                             <th>Métrique</th>
-                            <th>Sept</th>
                             <th>Oct</th>
                             <th>Nov</th>
                             <th>Déc</th>
                             <th>Jan</th>
-                            <th>Feb MTD</th>
+                            <th>Feb</th>
+                            <th>Mar MTD</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>SEO Impressions</td>
-                            <td>15,626</td>
                             <td>10,344</td>
                             <td>12,161</td>
                             <td>10,709</td>
                             <td>34,814</td>
-                            <td class="highlight-cell">29,673</td>
+                            <td>39,791</td>
+                            <td class="highlight-cell">9,036</td>
                         </tr>
                         <tr>
-                            <td>LP Views</td>
+                            <td>SEO Clicks</td>
                             <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>550</td>
+                            <td class="highlight-cell">-</td>
+                        </tr>
+                        <tr>
+                            <td>Visitors</td>
                             <td>~3,400</td>
                             <td>~1,900</td>
                             <td>~2,000</td>
                             <td>2,200</td>
-                            <td class="highlight-cell">2,300</td>
-                        </tr>
-                        <tr>
-                            <td>LP Conversion</td>
-                            <td>-</td>
-                            <td>3.9%</td>
-                            <td>5.8%</td>
-                            <td>3.45%</td>
-                            <td>4.1%</td>
-                            <td class="highlight-cell">4.7%</td>
+                            <td>2,450</td>
+                            <td class="highlight-cell">445</td>
                         </tr>
                         <tr>
                             <td>Signups</td>
-                            <td>92</td>
                             <td>134</td>
                             <td>110</td>
                             <td>69</td>
                             <td>90</td>
-                            <td class="highlight-cell">109</td>
+                            <td>109</td>
+                            <td class="highlight-cell">14</td>
                         </tr>
                         <tr>
                             <td>Activation Rate</td>
-                            <td>62%</td>
                             <td>65%</td>
                             <td>78%</td>
                             <td>-</td>
                             <td>54%</td>
-                            <td class="highlight-cell">39%</td>
+                            <td>39%</td>
+                            <td class="highlight-cell">93% 🔥</td>
                         </tr>
                         <tr>
                             <td>MRR</td>
-                            <td>$2,497</td>
                             <td>$3,264</td>
                             <td>$4,322</td>
                             <td>$4,765</td>
                             <td>$5,431</td>
-                            <td class="highlight-cell">$5,945</td>
+                            <td>$5,678</td>
+                            <td class="highlight-cell">$5,682</td>
                         </tr>
                         <tr>
                             <td>Paid Subs</td>
-                            <td>-</td>
                             <td>80</td>
                             <td>86</td>
                             <td>92</td>
                             <td>100</td>
-                            <td class="highlight-cell">113</td>
+                            <td>107</td>
+                            <td class="highlight-cell">107</td>
                         </tr>
                         <tr>
                             <td>ARPU</td>
-                            <td>-</td>
                             <td>$41</td>
                             <td>$50</td>
                             <td>$52</td>
                             <td>$54</td>
+                            <td>$53</td>
                             <td class="highlight-cell">$53</td>
                         </tr>
                         <tr>
-                            <td>Churn (clients)</td>
-                            <td>8</td>
+                            <td>Premium (new)</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>12</td>
+                            <td>13</td>
+                            <td class="highlight-cell">-</td>
+                        </tr>
+                        <tr>
+                            <td>Conv. Rate</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>11%</td>
+                            <td>12%</td>
+                            <td class="highlight-cell">-</td>
+                        </tr>
+                        <tr>
+                            <td>Churn (users)</td>
                             <td>7</td>
                             <td>15</td>
                             <td>10</td>
                             <td>12</td>
-                            <td class="highlight-cell">11</td>
+                            <td>15</td>
+                            <td class="highlight-cell">-</td>
                         </tr>
                         <tr>
-                            <td>Churn (%)</td>
-                            <td>-</td>
-                            <td>9.7%</td>
-                            <td>18.8%</td>
-                            <td>11.6%</td>
-                            <td>13.0%</td>
-                            <td class="highlight-cell">10.7%</td>
-                        </tr>
-                        <tr>
-                            <td>LTV (3mo avg)</td>
+                            <td>Churn (MRR)</td>
                             <td>-</td>
                             <td>-</td>
                             <td>-</td>
-                            <td>$388</td>
-                            <td>$373</td>
-                            <td class="highlight-cell">$495</td>
+                            <td>-$534</td>
+                            <td>-$801</td>
+                            <td class="highlight-cell">-</td>
                         </tr>
                     </tbody>
                 </table>
@@ -732,9 +783,9 @@
 
         <!-- MRR Projection -->
         <div class="card" style="margin-bottom: 1.5rem;">
-            <h2>🔮 Projection MRR Conservatrice (12 mois)</h2>
+            <h2>🔮 Projection MRR (12 mois)</h2>
             <p style="color: var(--muted); font-size: 0.85rem; margin-bottom: 1rem;">
-                Basé sur la croissance récente MoM (~11% - moyenne Oct-Jan)
+                Basé sur la croissance récente MoM (~8% - moyenne Nov-Feb)
             </p>
             <div class="chart-container" style="height: 300px;">
                 <canvas id="projectionChart"></canvas>
@@ -742,62 +793,62 @@
             <div class="projection-summary" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-top: 1.5rem;">
                 <div style="text-align: center; padding: 1rem; background: rgba(99, 102, 241, 0.1); border-radius: 8px;">
                     <div style="font-size: 0.75rem; color: var(--muted); text-transform: uppercase;">MRR Actuel</div>
-                    <div style="font-size: 1.5rem; font-weight: 700;">$5,945</div>
+                    <div style="font-size: 1.5rem; font-weight: 700;">$5,678</div>
                 </div>
                 <div style="text-align: center; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 8px;">
                     <div style="font-size: 0.75rem; color: var(--muted); text-transform: uppercase;">MRR +6 mois</div>
-                    <div style="font-size: 1.5rem; font-weight: 700; color: var(--success);">$11,120</div>
+                    <div style="font-size: 1.5rem; font-weight: 700; color: var(--success);">$9,000</div>
                     <div style="font-size: 0.7rem; color: var(--success);">Aug projection</div>
                 </div>
                 <div style="text-align: center; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 8px;">
                     <div style="font-size: 0.75rem; color: var(--muted); text-transform: uppercase;">MRR +12 mois</div>
-                    <div style="font-size: 1.5rem; font-weight: 700; color: var(--success);">$19,000</div>
+                    <div style="font-size: 1.5rem; font-weight: 700; color: var(--success);">$14,300</div>
                     <div style="font-size: 0.7rem; color: var(--success);">Feb 2027 projection</div>
                 </div>
                 <div style="text-align: center; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 8px;">
                     <div style="font-size: 0.75rem; color: var(--muted); text-transform: uppercase;">ARR Projeté</div>
-                    <div style="font-size: 1.5rem; font-weight: 700; color: var(--success);">$228K</div>
+                    <div style="font-size: 1.5rem; font-weight: 700; color: var(--success);">$172K</div>
                     <div style="font-size: 0.7rem; color: var(--success);">Feb 2027</div>
                 </div>
             </div>
             <p style="color: var(--muted); font-size: 0.75rem; margin-top: 1rem; font-style: italic;">
-                📊 Projection conservatrice basée sur le taux de croissance récent (11% MoM vs 21% historique)
+                📊 Projection basée sur le taux de croissance récent (8% MoM)
             </p>
         </div>
 
         <!-- Alerts -->
         <div class="alerts">
             <div class="alert success">
-                <strong>📈 109 signups! 🔥</strong>
-                Record du mois ! +21% vs Janvier (90)
+                <strong>🔍 SEO Impressions +34% 🔥</strong>
+                39,791 impressions en Février !
             </div>
             <div class="alert success">
-                <strong>🎉 12 Premiums ce mois !</strong>
-                11% conversion rate — record absolu ! 🏆
+                <strong>🎉 13 Premiums ce mois !</strong>
+                12% conversion rate — nouveau record ! 🏆
             </div>
             <div class="alert success">
-                <strong>💰 +$514 net MRR</strong>
-                MRR quasi à $6K ! Objectif $6K atteint ce mois ?
+                <strong>📈 109 signups!</strong>
+                +21% vs Janvier (90)
             </div>
             <div class="alert success">
-                <strong>🔍 SEO Impressions +74%</strong>
-                29,673 impressions ! Spike le 19 Feb (55 clicks/jour)
+                <strong>🤖 Score GEO = 2</strong>
+                Premiers referrals AI (ChatGPT + Gemini)
             </div>
             <div class="alert success">
-                <strong>📊 YouTube apparaît !</strong>
-                Nouveau canal de traffic — 20 visites ce mois
+                <strong>🔥 Mars activation 93%</strong>
+                LinkedIn connected rate explosif !
+            </div>
+            <div class="alert danger">
+                <strong>⚠️ Churn élevé: 15 users</strong>
+                -$801 MRR perdu. Retention focus needed.
             </div>
             <div class="alert warning">
-                <strong>⚠️ Bounce 82.9%</strong>
-                En hausse vs 81.2%. Landing page à optimiser.
+                <strong>⚠️ MRR en légère baisse</strong>
+                $5,678 vs $5,945 fin Janvier. Churn &gt; new biz.
             </div>
             <div class="alert warning">
                 <strong>⚠️ Activation ↓</strong>
-                39% campaign running vs 44% Feb 20. Onboarding à surveiller.
-            </div>
-            <div class="alert warning">
-                <strong>⚠️ 11 churns (-$534)</strong>
-                +3 churns vs Feb 20. Retention focus needed.
+                39% campaign running. Onboarding à surveiller.
             </div>
         </div>
 
@@ -831,7 +882,7 @@
             data: {
                 labels: ['Sept', 'Oct', 'Nov', 'Déc', 'Jan', 'Feb'],
                 datasets: [{
-                    data: [2497, 3264, 4322, 4765, 5431, 5945],
+                    data: [2497, 3264, 4322, 4765, 5431, 5678],
                     borderColor: '#6366f1',
                     backgroundColor: 'rgba(99, 102, 241, 0.1)',
                     fill: true,
@@ -862,7 +913,7 @@
             data: {
                 labels: ['Sept', 'Oct', 'Nov', 'Déc', 'Jan', 'Feb'],
                 datasets: [{
-                    data: [72, 80, 86, 92, 100, 113],
+                    data: [72, 80, 86, 92, 100, 107],
                     backgroundColor: ['#475569', '#475569', '#475569', '#475569', '#475569', '#10b981'],
                     borderRadius: 6
                 }]
@@ -870,14 +921,14 @@
             options: chartConfig
         });
 
-        // Note: seoImpressions history: [15626, 10344, 12161, 10709, 34814, 29673]
+        // Note: seoImpressions history: [15626, 10344, 12161, 10709, 34814, 39791]
 
         // MRR Projection Chart - Conservative + Objectives
         const projectionMonths = ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sept', 'Oct', 'Nov', 'Déc'];
         
-        // Conservative projection (11% MoM) starting from Feb actual
-        const conservativeGrowth = 0.11;
-        const projectedMRR = [5431, 5945]; // Jan, Feb actual
+        // Conservative projection (8% MoM) starting from Feb actual
+        const conservativeGrowth = 0.08;
+        const projectedMRR = [5431, 5678]; // Jan, Feb actual
         for (let i = 2; i < 12; i++) {
             projectedMRR.push(Math.round(projectedMRR[projectedMRR.length - 1] * (1 + conservativeGrowth)));
         }
@@ -890,7 +941,7 @@
             data: {
                 labels: projectionMonths,
                 datasets: [{
-                    label: 'MRR Projeté (11% MoM)',
+                    label: 'MRR Projeté (8% MoM)',
                     data: projectedMRR,
                     borderColor: '#10b981',
                     backgroundColor: 'rgba(16, 185, 129, 0.1)',
