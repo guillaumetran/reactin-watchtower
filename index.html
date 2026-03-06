@@ -6,8 +6,6 @@
     <title>ReactIn Growth Watchtower</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        // Simple client-side auth (not for highly sensitive data)
-        // Password hash (SHA-256 of the actual password)
         const PASS_HASH = '37eb841a6f113cb3897d955e357e9f618ba2dcecaf46593dfa1266b36460dc7d';
         
         async function sha256(str) {
@@ -73,14 +71,7 @@
             border-bottom: 1px solid #334155;
         }
         
-        h1 {
-            font-size: 1.75rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-        
+        h1 { font-size: 1.75rem; font-weight: 700; display: flex; align-items: center; gap: 0.75rem; }
         .date { color: var(--muted); font-size: 0.9rem; }
         
         .kpi-grid {
@@ -91,9 +82,7 @@
         }
         
         @media (min-width: 1200px) {
-            .kpi-grid.kpi-7 {
-                grid-template-columns: repeat(7, 1fr);
-            }
+            .kpi-grid.kpi-7 { grid-template-columns: repeat(7, 1fr); }
         }
         
         .kpi-card {
@@ -108,39 +97,15 @@
             background: linear-gradient(135deg, #1e293b 0%, #312e81 100%);
         }
         
-        .kpi-label {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--muted);
-            margin-bottom: 0.5rem;
-        }
-        
-        .kpi-value {
-            font-size: 1.75rem;
-            font-weight: 700;
-        }
-        
-        .kpi-change {
-            font-size: 0.85rem;
-            margin-top: 0.25rem;
-        }
-        
+        .kpi-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 0.5rem; }
+        .kpi-value { font-size: 1.75rem; font-weight: 700; }
+        .kpi-change { font-size: 0.85rem; margin-top: 0.25rem; }
         .kpi-change.positive { color: var(--success); }
         .kpi-change.negative { color: var(--danger); }
         .kpi-change.warning { color: var(--warning); }
         
-        /* Tooltip */
-        .has-tooltip {
-            position: relative;
-            cursor: help;
-        }
-        
-        .info-icon {
-            font-size: 0.7rem;
-            opacity: 0.6;
-            margin-left: 0.25rem;
-        }
+        .has-tooltip { position: relative; cursor: help; }
+        .info-icon { font-size: 0.7rem; opacity: 0.6; margin-left: 0.25rem; }
         
         .tooltip {
             position: absolute;
@@ -161,33 +126,8 @@
             box-shadow: 0 4px 20px rgba(0,0,0,0.3);
         }
         
-        .tooltip code {
-            background: rgba(0,0,0,0.3);
-            padding: 0.25rem 0.5rem;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            display: block;
-            margin: 0.5rem 0;
-        }
-        
-        .has-tooltip:hover .tooltip {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .tooltip-wide {
-            width: 340px;
-        }
-        
-        .tooltip::after {
-            content: '';
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            border: 8px solid transparent;
-            border-top-color: #334155;
-        }
+        .has-tooltip:hover .tooltip { opacity: 1; visibility: visible; }
+        .tooltip::after { content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border: 8px solid transparent; border-top-color: #334155; }
         
         .grid-2 {
             display: grid;
@@ -215,32 +155,11 @@
             border: 1px solid #334155;
         }
         
-        .card h2 {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
+        .card h2 { font-size: 1rem; font-weight: 600; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .chart-container { position: relative; height: 250px; }
         
-        .chart-container {
-            position: relative;
-            height: 250px;
-        }
-        
-        .funnel {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-        
-        .funnel-step {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        
+        .funnel { display: flex; flex-direction: column; gap: 0.5rem; }
+        .funnel-step { display: flex; align-items: center; gap: 1rem; }
         .funnel-bar {
             height: 32px;
             background: linear-gradient(90deg, var(--primary), #818cf8);
@@ -251,26 +170,11 @@
             font-weight: 600;
             font-size: 0.85rem;
             min-width: 60px;
-            transition: all 0.3s;
         }
+        .funnel-label { font-size: 0.85rem; color: var(--muted); min-width: 140px; }
+        .funnel-pct { font-size: 0.85rem; color: var(--muted); }
         
-        .funnel-label {
-            font-size: 0.85rem;
-            color: var(--muted);
-            min-width: 140px;
-        }
-        
-        .funnel-pct {
-            font-size: 0.85rem;
-            color: var(--muted);
-        }
-        
-        .breakdown-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 0.75rem;
-        }
-        
+        .breakdown-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
         .breakdown-item {
             display: flex;
             justify-content: space-between;
@@ -279,184 +183,45 @@
             background: rgba(255,255,255,0.03);
             border-radius: 8px;
         }
-        
-        .breakdown-item .label {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.85rem;
-        }
-        
-        .breakdown-item .value {
-            font-weight: 600;
-        }
-        
+        .breakdown-item .label { display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; }
+        .breakdown-item .value { font-weight: 600; }
         .breakdown-item.positive .value { color: var(--success); }
         .breakdown-item.negative .value { color: var(--danger); }
         
-        .alerts {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
-            gap: 1rem;
-        }
-        
-        .alert {
-            padding: 1rem 1.25rem;
-            border-radius: 8px;
-            font-size: 0.9rem;
-        }
-        
-        .alert.success {
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            color: #6ee7b7;
-        }
-        
-        .alert.warning {
-            background: rgba(245, 158, 11, 0.1);
-            border: 1px solid rgba(245, 158, 11, 0.3);
-            color: #fcd34d;
-        }
-        
-        .alert.danger {
-            background: rgba(239, 68, 68, 0.1);
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            color: #fca5a5;
-        }
-        
+        .alerts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 1rem; }
+        .alert { padding: 1rem 1.25rem; border-radius: 8px; font-size: 0.9rem; }
+        .alert.success { background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); color: #6ee7b7; }
+        .alert.warning { background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); color: #fcd34d; }
+        .alert.danger { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); color: #fca5a5; }
         .alert strong { display: block; margin-bottom: 0.25rem; }
         
-        .traffic-sources {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-        
-        .source-badge {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            background: rgba(255,255,255,0.05);
-            border-radius: 20px;
-            font-size: 0.85rem;
-        }
-        
-        .source-badge .count {
-            font-weight: 600;
-            color: var(--primary);
-        }
+        .traffic-sources { display: flex; gap: 1rem; flex-wrap: wrap; }
+        .source-badge { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; background: rgba(255,255,255,0.05); border-radius: 20px; font-size: 0.85rem; }
+        .source-badge .count { font-weight: 600; color: var(--primary); }
+        .source-badge.mtd { border: 1px dashed var(--primary); }
 
         .table-container { overflow-x: auto; }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.85rem;
-        }
-        
-        th, td {
-            padding: 0.75rem;
-            text-align: right;
-            border-bottom: 1px solid #334155;
-        }
-        
+        table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        th, td { padding: 0.75rem; text-align: right; border-bottom: 1px solid #334155; }
         th:first-child, td:first-child { text-align: left; }
-        
-        th {
-            color: var(--muted);
-            font-weight: 500;
-            text-transform: uppercase;
-            font-size: 0.7rem;
-            letter-spacing: 0.05em;
-        }
-        
+        th { color: var(--muted); font-weight: 500; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 0.05em; }
         .highlight-cell { color: var(--primary); font-weight: 600; }
 
-        /* Auth Screen */
-        #auth-screen {
-            position: fixed;
-            inset: 0;
-            background: var(--bg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-        }
-        
+        #auth-screen { position: fixed; inset: 0; background: var(--bg); display: flex; align-items: center; justify-content: center; z-index: 1000; }
         #dashboard { display: none; }
+        .auth-box { background: var(--card); padding: 2.5rem; border-radius: 16px; border: 1px solid #334155; text-align: center; max-width: 400px; width: 90%; }
+        .auth-box h2 { margin-bottom: 0.5rem; font-size: 1.5rem; }
+        .auth-box p { color: var(--muted); margin-bottom: 1.5rem; font-size: 0.9rem; }
+        .auth-box input { width: 100%; padding: 0.875rem 1rem; border-radius: 8px; border: 1px solid #334155; background: var(--bg); color: var(--text); font-size: 1rem; margin-bottom: 1rem; }
+        .auth-box input:focus { outline: none; border-color: var(--primary); }
+        .auth-box button { width: 100%; padding: 0.875rem; border-radius: 8px; border: none; background: var(--primary); color: white; font-size: 1rem; font-weight: 600; cursor: pointer; }
+        .error-msg { color: var(--danger); font-size: 0.85rem; margin-top: 1rem; display: none; }
+        footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid #334155; text-align: center; color: var(--muted); font-size: 0.8rem; }
         
-        .auth-box {
-            background: var(--card);
-            padding: 2.5rem;
-            border-radius: 16px;
-            border: 1px solid #334155;
-            text-align: center;
-            max-width: 400px;
-            width: 90%;
-        }
-        
-        .auth-box h2 {
-            margin-bottom: 0.5rem;
-            font-size: 1.5rem;
-        }
-        
-        .auth-box p {
-            color: var(--muted);
-            margin-bottom: 1.5rem;
-            font-size: 0.9rem;
-        }
-        
-        .auth-box input {
-            width: 100%;
-            padding: 0.875rem 1rem;
-            border-radius: 8px;
-            border: 1px solid #334155;
-            background: var(--bg);
-            color: var(--text);
-            font-size: 1rem;
-            margin-bottom: 1rem;
-        }
-        
-        .auth-box input:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-        
-        .auth-box button {
-            width: 100%;
-            padding: 0.875rem;
-            border-radius: 8px;
-            border: none;
-            background: var(--primary);
-            color: white;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: opacity 0.2s;
-        }
-        
-        .auth-box button:hover { opacity: 0.9; }
-        
-        .error-msg {
-            color: var(--danger);
-            font-size: 0.85rem;
-            margin-top: 1rem;
-            display: none;
-        }
-
-        footer {
-            margin-top: 3rem;
-            padding-top: 1rem;
-            border-top: 1px solid #334155;
-            text-align: center;
-            color: var(--muted);
-            font-size: 0.8rem;
-        }
+        .mtd-badge { background: var(--primary); color: white; font-size: 0.65rem; padding: 0.15rem 0.4rem; border-radius: 4px; margin-left: 0.5rem; vertical-align: middle; }
     </style>
 </head>
 <body>
-    <!-- Auth Screen -->
     <div id="auth-screen">
         <div class="auth-box">
             <h2>🔭 ReactIn Watchtower</h2>
@@ -467,7 +232,6 @@
         </div>
     </div>
 
-    <!-- Dashboard -->
     <div id="dashboard" class="container">
         <header>
             <h1>🔭 ReactIn Growth Watchtower</h1>
@@ -478,7 +242,7 @@
         <div class="kpi-grid kpi-7">
             <div class="kpi-card highlight">
                 <div class="kpi-label">MRR</div>
-                <div class="kpi-value">$5,678</div>
+                <div class="kpi-value">$5,682 <span class="mtd-badge">MTD</span></div>
                 <div class="kpi-change positive">+5% vs Jan</div>
             </div>
             <div class="kpi-card">
@@ -494,12 +258,12 @@
             <div class="kpi-card">
                 <div class="kpi-label">SEO Impressions</div>
                 <div class="kpi-value">39,791</div>
-                <div class="kpi-change positive">+34% vs Jan 🔥</div>
+                <div class="kpi-change positive">Feb +34% 🔥</div>
             </div>
             <div class="kpi-card">
                 <div class="kpi-label">Signups</div>
                 <div class="kpi-value">109</div>
-                <div class="kpi-change positive">+21% vs Jan 🔥</div>
+                <div class="kpi-change positive">Feb +21% 🔥</div>
             </div>
             <div class="kpi-card has-tooltip">
                 <div class="kpi-label">NRR (Feb) <span class="info-icon">ⓘ</span></div>
@@ -544,7 +308,8 @@
         <!-- Funnel & Breakdown -->
         <div class="grid-2">
             <div class="card">
-                <h2>🎯 Activation Funnel (Février)</h2>
+                <h2>🎯 Activation Funnel</h2>
+                <p style="color: var(--muted); font-size: 0.8rem; margin-bottom: 1rem;">Février | <span style="color: var(--primary);">Mars MTD (1-6): 93% LI connected 🔥</span></p>
                 <div class="funnel">
                     <div class="funnel-step">
                         <span class="funnel-label">Signups</span>
@@ -579,7 +344,8 @@
                 </div>
             </div>
             <div class="card">
-                <h2>💰 Revenue Breakdown (Février)</h2>
+                <h2>💰 Revenue Breakdown</h2>
+                <p style="color: var(--muted); font-size: 0.8rem; margin-bottom: 1rem;">Février | <span style="color: var(--primary);">Mars MTD: +$4</span></p>
                 <div class="breakdown-grid">
                     <div class="breakdown-item positive">
                         <span class="label">🆕 New Premium</span>
@@ -605,54 +371,30 @@
             </div>
         </div>
 
-        <!-- Mars MTD Card -->
-        <div class="card" style="margin-bottom: 1.5rem; border-color: var(--primary);">
-            <h2>📅 Mars MTD (1-6)</h2>
-            <div class="kpi-grid" style="margin-bottom: 0;">
-                <div class="kpi-card">
-                    <div class="kpi-label">MRR</div>
-                    <div class="kpi-value">$5,682</div>
-                    <div class="kpi-change positive">+$4 vs Feb close</div>
-                </div>
-                <div class="kpi-card">
-                    <div class="kpi-label">Paid Subs</div>
-                    <div class="kpi-value">107</div>
-                    <div class="kpi-change warning">stable</div>
-                </div>
-                <div class="kpi-card">
-                    <div class="kpi-label">SEO Impressions</div>
-                    <div class="kpi-value">9,036</div>
-                    <div class="kpi-change positive">3 jours</div>
-                </div>
-                <div class="kpi-card">
-                    <div class="kpi-label">Visitors</div>
-                    <div class="kpi-value">445</div>
-                    <div class="kpi-change positive">MTD</div>
-                </div>
-                <div class="kpi-card">
-                    <div class="kpi-label">Signups</div>
-                    <div class="kpi-value">14</div>
-                    <div class="kpi-change positive">MTD</div>
-                </div>
-                <div class="kpi-card">
-                    <div class="kpi-label">Activation</div>
-                    <div class="kpi-value">93%</div>
-                    <div class="kpi-change positive">LI connected 🔥</div>
-                </div>
-            </div>
-        </div>
-
         <!-- Traffic Sources -->
         <div class="card" style="margin-bottom: 1.5rem;">
-            <h2>🌐 Traffic Sources (Février)</h2>
+            <h2>🌐 Traffic Sources</h2>
+            <p style="color: var(--muted); font-size: 0.8rem; margin-bottom: 1rem;">Février | Mars MTD en pointillés</p>
             <div class="traffic-sources">
                 <div class="source-badge">
-                    <span>SEO Clicks</span>
+                    <span>SEO Clicks (Feb)</span>
                     <span class="count">550</span>
                 </div>
                 <div class="source-badge">
-                    <span>Visitors</span>
+                    <span>Visitors (Feb)</span>
                     <span class="count">2,450</span>
+                </div>
+                <div class="source-badge mtd">
+                    <span>SEO Impr (Mar)</span>
+                    <span class="count">9,036</span>
+                </div>
+                <div class="source-badge mtd">
+                    <span>Visitors (Mar)</span>
+                    <span class="count">445</span>
+                </div>
+                <div class="source-badge mtd">
+                    <span>Signups (Mar)</span>
+                    <span class="count">14</span>
                 </div>
             </div>
         </div>
@@ -665,6 +407,7 @@
                     <thead>
                         <tr>
                             <th>Métrique</th>
+                            <th>Sept</th>
                             <th>Oct</th>
                             <th>Nov</th>
                             <th>Déc</th>
@@ -676,6 +419,7 @@
                     <tbody>
                         <tr>
                             <td>SEO Impressions</td>
+                            <td>15,626</td>
                             <td>10,344</td>
                             <td>12,161</td>
                             <td>10,709</td>
@@ -684,16 +428,8 @@
                             <td class="highlight-cell">9,036</td>
                         </tr>
                         <tr>
-                            <td>SEO Clicks</td>
+                            <td>LP Views</td>
                             <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>550</td>
-                            <td class="highlight-cell">-</td>
-                        </tr>
-                        <tr>
-                            <td>Visitors</td>
                             <td>~3,400</td>
                             <td>~1,900</td>
                             <td>~2,000</td>
@@ -702,7 +438,18 @@
                             <td class="highlight-cell">445</td>
                         </tr>
                         <tr>
+                            <td>LP Conversion</td>
+                            <td>-</td>
+                            <td>3.9%</td>
+                            <td>5.8%</td>
+                            <td>3.45%</td>
+                            <td>4.1%</td>
+                            <td>4.4%</td>
+                            <td class="highlight-cell">3.1%</td>
+                        </tr>
+                        <tr>
                             <td>Signups</td>
+                            <td>92</td>
                             <td>134</td>
                             <td>110</td>
                             <td>69</td>
@@ -712,6 +459,7 @@
                         </tr>
                         <tr>
                             <td>Activation Rate</td>
+                            <td>62%</td>
                             <td>65%</td>
                             <td>78%</td>
                             <td>-</td>
@@ -721,6 +469,7 @@
                         </tr>
                         <tr>
                             <td>MRR</td>
+                            <td>$2,497</td>
                             <td>$3,264</td>
                             <td>$4,322</td>
                             <td>$4,765</td>
@@ -730,6 +479,7 @@
                         </tr>
                         <tr>
                             <td>Paid Subs</td>
+                            <td>-</td>
                             <td>80</td>
                             <td>86</td>
                             <td>92</td>
@@ -739,6 +489,7 @@
                         </tr>
                         <tr>
                             <td>ARPU</td>
+                            <td>-</td>
                             <td>$41</td>
                             <td>$50</td>
                             <td>$52</td>
@@ -747,25 +498,8 @@
                             <td class="highlight-cell">$53</td>
                         </tr>
                         <tr>
-                            <td>Premium (new)</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>12</td>
-                            <td>13</td>
-                            <td class="highlight-cell">-</td>
-                        </tr>
-                        <tr>
-                            <td>Conv. Rate</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>11%</td>
-                            <td>12%</td>
-                            <td class="highlight-cell">-</td>
-                        </tr>
-                        <tr>
-                            <td>Churn (users)</td>
+                            <td>Churn (clients)</td>
+                            <td>8</td>
                             <td>7</td>
                             <td>15</td>
                             <td>10</td>
@@ -774,12 +508,23 @@
                             <td class="highlight-cell">-</td>
                         </tr>
                         <tr>
-                            <td>Churn (MRR)</td>
+                            <td>Churn (%)</td>
+                            <td>-</td>
+                            <td>9.7%</td>
+                            <td>18.8%</td>
+                            <td>11.6%</td>
+                            <td>13.0%</td>
+                            <td>14.0%</td>
+                            <td class="highlight-cell">-</td>
+                        </tr>
+                        <tr>
+                            <td>LTV (3mo avg)</td>
                             <td>-</td>
                             <td>-</td>
                             <td>-</td>
-                            <td>-$534</td>
-                            <td>-$801</td>
+                            <td>$388</td>
+                            <td>$373</td>
+                            <td>$378</td>
                             <td class="highlight-cell">-</td>
                         </tr>
                     </tbody>
@@ -799,27 +544,24 @@
             <div class="projection-summary" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-top: 1.5rem;">
                 <div style="text-align: center; padding: 1rem; background: rgba(99, 102, 241, 0.1); border-radius: 8px;">
                     <div style="font-size: 0.75rem; color: var(--muted); text-transform: uppercase;">MRR Actuel</div>
-                    <div style="font-size: 1.5rem; font-weight: 700;">$5,678</div>
+                    <div style="font-size: 1.5rem; font-weight: 700;">$5,682</div>
                 </div>
                 <div style="text-align: center; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 8px;">
                     <div style="font-size: 0.75rem; color: var(--muted); text-transform: uppercase;">MRR +6 mois</div>
                     <div style="font-size: 1.5rem; font-weight: 700; color: var(--success);">$9,000</div>
-                    <div style="font-size: 0.7rem; color: var(--success);">Aug projection</div>
+                    <div style="font-size: 0.7rem; color: var(--success);">Sept projection</div>
                 </div>
                 <div style="text-align: center; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 8px;">
                     <div style="font-size: 0.75rem; color: var(--muted); text-transform: uppercase;">MRR +12 mois</div>
                     <div style="font-size: 1.5rem; font-weight: 700; color: var(--success);">$14,300</div>
-                    <div style="font-size: 0.7rem; color: var(--success);">Feb 2027 projection</div>
+                    <div style="font-size: 0.7rem; color: var(--success);">Mar 2027 projection</div>
                 </div>
                 <div style="text-align: center; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 8px;">
                     <div style="font-size: 0.75rem; color: var(--muted); text-transform: uppercase;">ARR Projeté</div>
                     <div style="font-size: 1.5rem; font-weight: 700; color: var(--success);">$172K</div>
-                    <div style="font-size: 0.7rem; color: var(--success);">Feb 2027</div>
+                    <div style="font-size: 0.7rem; color: var(--success);">Mar 2027</div>
                 </div>
             </div>
-            <p style="color: var(--muted); font-size: 0.75rem; margin-top: 1rem; font-style: italic;">
-                📊 Projection basée sur le taux de croissance récent (8% MoM)
-            </p>
         </div>
 
         <!-- Alerts -->
@@ -829,72 +571,60 @@
                 39,791 impressions en Février !
             </div>
             <div class="alert success">
-                <strong>🎉 13 Premiums ce mois !</strong>
+                <strong>🎉 13 Premiums en Feb !</strong>
                 12% conversion rate — nouveau record ! 🏆
-            </div>
-            <div class="alert success">
-                <strong>📈 109 signups!</strong>
-                +21% vs Janvier (90)
-            </div>
-            <div class="alert success">
-                <strong>🤖 Score GEO = 2</strong>
-                Premiers referrals AI (ChatGPT + Gemini)
             </div>
             <div class="alert success">
                 <strong>🔥 Mars activation 93%</strong>
                 LinkedIn connected rate explosif !
             </div>
+            <div class="alert success">
+                <strong>🤖 Score GEO = 2</strong>
+                Premiers referrals AI (ChatGPT + Gemini)
+            </div>
             <div class="alert danger">
                 <strong>⚠️ Churn élevé: 15 users</strong>
-                -$801 MRR perdu. Retention focus needed.
+                -$801 MRR perdu en Feb. Retention focus needed.
             </div>
             <div class="alert warning">
-                <strong>⚠️ MRR en légère baisse</strong>
-                $5,678 vs $5,945 fin Janvier. Churn &gt; new biz.
+                <strong>⚠️ Churn % monte</strong>
+                14% en Feb vs 13% en Jan. À surveiller.
             </div>
             <div class="alert warning">
-                <strong>⚠️ Activation ↓</strong>
-                39% campaign running. Onboarding à surveiller.
+                <strong>⚠️ Activation Feb ↓</strong>
+                39% campaign running. Onboarding à améliorer.
             </div>
         </div>
 
         <footer>
             ReactIn Growth Watchtower • Généré par Rufus 🐕 & Clawd 🦫
         </footer>
-    </div><!-- end dashboard -->
+    </div>
 
     <script>
         const chartConfig = {
             responsive: true,
             maintainAspectRatio: false,
-            plugins: {
-                legend: { display: false }
-            },
+            plugins: { legend: { display: false } },
             scales: {
-                x: {
-                    grid: { color: 'rgba(255,255,255,0.05)' },
-                    ticks: { color: '#94a3b8' }
-                },
-                y: {
-                    grid: { color: 'rgba(255,255,255,0.05)' },
-                    ticks: { color: '#94a3b8' }
-                }
+                x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } },
+                y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } }
             }
         };
 
-        // MRR Chart
+        // MRR Chart - includes Mar MTD
         new Chart(document.getElementById('mrrChart'), {
             type: 'line',
             data: {
-                labels: ['Sept', 'Oct', 'Nov', 'Déc', 'Jan', 'Feb'],
+                labels: ['Sept', 'Oct', 'Nov', 'Déc', 'Jan', 'Feb', 'Mar'],
                 datasets: [{
-                    data: [2497, 3264, 4322, 4765, 5431, 5678],
+                    data: [2497, 3264, 4322, 4765, 5431, 5678, 5682],
                     borderColor: '#6366f1',
                     backgroundColor: 'rgba(99, 102, 241, 0.1)',
                     fill: true,
                     tension: 0.4,
-                    pointBackgroundColor: '#6366f1',
-                    pointRadius: 6,
+                    pointBackgroundColor: ['#6366f1', '#6366f1', '#6366f1', '#6366f1', '#6366f1', '#6366f1', '#10b981'],
+                    pointRadius: [6, 6, 6, 6, 6, 6, 8],
                     pointHoverRadius: 8
                 }]
             },
@@ -902,45 +632,33 @@
                 ...chartConfig,
                 scales: {
                     ...chartConfig.scales,
-                    y: {
-                        ...chartConfig.scales.y,
-                        ticks: {
-                            ...chartConfig.scales.y.ticks,
-                            callback: (v) => '$' + v.toLocaleString()
-                        }
-                    }
+                    y: { ...chartConfig.scales.y, ticks: { ...chartConfig.scales.y.ticks, callback: (v) => '$' + v.toLocaleString() } }
                 }
             }
         });
 
-        // Subscribers Chart
+        // Subscribers Chart - includes Mar MTD
         new Chart(document.getElementById('subsChart'), {
             type: 'bar',
             data: {
-                labels: ['Sept', 'Oct', 'Nov', 'Déc', 'Jan', 'Feb'],
+                labels: ['Sept', 'Oct', 'Nov', 'Déc', 'Jan', 'Feb', 'Mar'],
                 datasets: [{
-                    data: [72, 80, 86, 92, 100, 107],
-                    backgroundColor: ['#475569', '#475569', '#475569', '#475569', '#475569', '#10b981'],
+                    data: [72, 80, 86, 92, 100, 107, 107],
+                    backgroundColor: ['#475569', '#475569', '#475569', '#475569', '#475569', '#475569', '#10b981'],
                     borderRadius: 6
                 }]
             },
             options: chartConfig
         });
 
-        // Note: seoImpressions history: [15626, 10344, 12161, 10709, 34814, 39791]
-
-        // MRR Projection Chart - Conservative + Objectives
-        const projectionMonths = ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sept', 'Oct', 'Nov', 'Déc'];
-        
-        // Conservative projection (8% MoM) starting from Feb actual
+        // MRR Projection Chart
+        const projectionMonths = ['Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sept', 'Oct', 'Nov', 'Déc', 'Jan', 'Fév', 'Mar'];
         const conservativeGrowth = 0.08;
-        const projectedMRR = [5431, 5678]; // Jan, Feb actual
-        for (let i = 2; i < 12; i++) {
+        const projectedMRR = [5678, 5682]; // Feb final, Mar MTD actual
+        for (let i = 2; i < 14; i++) {
             projectedMRR.push(Math.round(projectedMRR[projectedMRR.length - 1] * (1 + conservativeGrowth)));
         }
-        
-        // Objectives
-        const objectifsMRR = [5250, 5700, 6500, 7400, 8400, 9600, 11000, 12600, 14400, 16500, 18900, 21500];
+        const objectifsMRR = [5700, 6500, 7400, 8400, 9600, 11000, 12600, 14400, 16500, 18900, 21500, 24000, 27000, 30000];
         
         new Chart(document.getElementById('projectionChart'), {
             type: 'line',
@@ -965,24 +683,15 @@
                     tension: 0.4,
                     pointBackgroundColor: '#ef4444',
                     pointRadius: 4,
-                    pointHoverRadius: 6,
                     borderDash: [5, 5]
                 }]
             },
             options: {
                 ...chartConfig,
-                plugins: {
-                    legend: { display: true, labels: { color: '#94a3b8' } }
-                },
+                plugins: { legend: { display: true, labels: { color: '#94a3b8' } } },
                 scales: {
                     ...chartConfig.scales,
-                    y: {
-                        ...chartConfig.scales.y,
-                        ticks: {
-                            ...chartConfig.scales.y.ticks,
-                            callback: (v) => '$' + (v/1000).toFixed(0) + 'K'
-                        }
-                    }
+                    y: { ...chartConfig.scales.y, ticks: { ...chartConfig.scales.y.ticks, callback: (v) => '$' + (v/1000).toFixed(0) + 'K' } }
                 }
             }
         });
