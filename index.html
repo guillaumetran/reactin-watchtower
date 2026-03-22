@@ -448,6 +448,24 @@
         .alert--warning { background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); color: var(--warning-light); }
         .alert--danger { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); color: var(--danger-light); }
 
+        /* ─── Collapsible Sections ───────────────────────────────── */
+        .card h2.collapsible {
+            cursor: pointer; user-select: none;
+        }
+        .card h2.collapsible::after {
+            content: '▾'; margin-left: auto; font-size: 0.8rem; color: var(--muted);
+            transition: transform 0.2s;
+        }
+        .card h2.collapsible.collapsed::after { transform: rotate(-90deg); }
+        .card .collapsible-content {
+            overflow: hidden; max-height: 2000px;
+            transition: max-height 0.3s ease, opacity 0.3s ease;
+            opacity: 1;
+        }
+        .card .collapsible-content.collapsed {
+            max-height: 0; opacity: 0;
+        }
+
         /* ─── Comparison Toggle ──────────────────────────────────── */
         .compare-toggle {
             display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;
@@ -1082,6 +1100,31 @@ document.getElementById('proj-summary').innerHTML = `
     </div>
 `;
 } // end initCharts
+
+// ─── Collapsible sections ────────────────────────────────────────────
+document.querySelectorAll('.card h2').forEach(h2 => {
+    h2.classList.add('collapsible');
+    h2.setAttribute('role', 'button');
+    h2.setAttribute('tabindex', '0');
+    h2.setAttribute('aria-expanded', 'true');
+    // Wrap siblings in a collapsible container
+    const content = document.createElement('div');
+    content.className = 'collapsible-content';
+    let sibling = h2.nextElementSibling;
+    while (sibling) {
+        const next = sibling.nextElementSibling;
+        content.appendChild(sibling);
+        sibling = next;
+    }
+    h2.parentNode.appendChild(content);
+    function toggle() {
+        const collapsed = h2.classList.toggle('collapsed');
+        content.classList.toggle('collapsed', collapsed);
+        h2.setAttribute('aria-expanded', !collapsed);
+    }
+    h2.addEventListener('click', toggle);
+    h2.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
+});
 
 // ─── Data validation (console warnings for inconsistencies) ─────────
 (function validateData() {
