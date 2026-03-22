@@ -362,7 +362,7 @@
 
         /* ─── Funnel ──────────────────────────────────────────────── */
         .funnel { display: flex; flex-direction: column; gap: 0.5rem; }
-        .funnel-step { display: flex; align-items: center; gap: 1rem; }
+        .funnel-step { display: flex; align-items: center; gap: 1rem; position: relative; }
         .funnel-label { font-size: 0.85rem; color: var(--muted); min-width: 140px; flex-shrink: 0; }
         .funnel-bar {
             height: 32px; border-radius: 4px; display: flex; align-items: center;
@@ -371,7 +371,6 @@
         .funnel-bar--primary { background: linear-gradient(90deg, var(--primary), var(--primary-light)); }
         .funnel-bar--success { background: var(--success); }
         .funnel-pct { font-size: 0.85rem; color: var(--muted); white-space: nowrap; }
-        .funnel-step { position: relative; }
         .funnel-conversion {
             position: absolute; left: 140px; top: -14px;
             font-size: 0.65rem; color: var(--warning); opacity: 0;
@@ -453,8 +452,7 @@
             grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
             gap: 1rem;
         }
-        .alert { padding: 1rem 1.25rem; border-radius: var(--radius-sm); font-size: 0.9rem; line-height: 1.5; }
-        .alert { transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.2s ease; }
+        .alert { padding: 1rem 1.25rem; border-radius: var(--radius-sm); font-size: 0.9rem; line-height: 1.5; transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.2s ease; }
         .alert:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
         .alert strong { display: block; margin-bottom: 0.25rem; }
         .alert--success { background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); color: var(--success-light); }
@@ -677,7 +675,7 @@
         <label for="password-input" class="sr-only">Mot de passe</label>
         <input type="password" id="password-input" placeholder="Mot de passe"
                aria-describedby="auth-desc error-msg" autofocus
-               onkeypress="if(event.key==='Enter')submitPassword()">
+               onkeydown="if(event.key==='Enter')submitPassword()">
         <button type="button" onclick="submitPassword()">Accéder</button>
         <p style="color: var(--muted); font-size: 0.75rem; margin-top: 0.75rem; opacity: 0.7;">Appuyez sur Entrée pour valider</p>
         <p class="error-msg" id="error-msg" role="alert" aria-live="assertive">Mot de passe incorrect</p>
