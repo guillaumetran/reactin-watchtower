@@ -55,8 +55,10 @@
             const s = document.createElement('script');
             s.src = 'https://cdn.jsdelivr.net/npm/chart.js';
             s.async = true;
-            s.onload = function() { hideChartSkeletons(); initCharts(); };
-            s.onerror = function() { showChartFallback(); };
+            let loaded = false;
+            const timeout = setTimeout(function() { if (!loaded) showChartFallback(); }, 10000);
+            s.onload = function() { loaded = true; clearTimeout(timeout); hideChartSkeletons(); initCharts(); };
+            s.onerror = function() { loaded = true; clearTimeout(timeout); showChartFallback(); };
             document.head.appendChild(s);
         }
         function showChartSkeletons() {
