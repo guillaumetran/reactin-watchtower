@@ -1114,6 +1114,15 @@ document.getElementById('proj-summary').innerHTML = `
 `;
 } // end initCharts
 
+// ─── Keyboard shortcuts ──────────────────────────────────────────────
+document.addEventListener('keydown', function(e) {
+    // Ignore if typing in an input
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    if (e.key === 'Escape') window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (e.key === 't' || e.key === 'T') toggleTheme();
+    if (e.key === 'p' || e.key === 'P') window.print();
+});
+
 // ─── Collapsible sections ────────────────────────────────────────────
 document.querySelectorAll('.card h2').forEach(h2 => {
     h2.classList.add('collapsible');
