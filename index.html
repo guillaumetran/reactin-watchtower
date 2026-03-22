@@ -50,11 +50,31 @@
         }
         function loadChartJS() {
             if (window.Chart) { initCharts(); return; }
+            showChartSkeletons();
             const s = document.createElement('script');
             s.src = 'https://cdn.jsdelivr.net/npm/chart.js';
             s.async = true;
-            s.onload = initCharts;
+            s.onload = function() { hideChartSkeletons(); initCharts(); };
+            s.onerror = function() { showChartFallback(); };
             document.head.appendChild(s);
+        }
+        function showChartSkeletons() {
+            document.querySelectorAll('.chart-container').forEach(c => {
+                if (c.querySelector('.chart-skeleton')) return;
+                const sk = document.createElement('div');
+                sk.className = 'chart-skeleton';
+                sk.setAttribute('aria-label', 'Chargement du graphique…');
+                sk.innerHTML = '<div class="skeleton-bar"></div><div class="skeleton-bar"></div><div class="skeleton-bar"></div><div class="skeleton-bar"></div><div class="skeleton-bar"></div>';
+                c.appendChild(sk);
+            });
+        }
+        function hideChartSkeletons() {
+            document.querySelectorAll('.chart-skeleton').forEach(s => s.remove());
+        }
+        function showChartFallback() {
+            document.querySelectorAll('.chart-container').forEach(c => {
+                c.innerHTML = '<div class="chart-fallback" role="alert"><span>⚠️</span><p>Impossible de charger les graphiques.<br>Vérifiez votre connexion internet.</p><button type="button" onclick="loadChartJS()">Réessayer</button></div>';
+            });
         }
         function onDashboardReady() {
             if (typeof startKPICounters === 'function') {
@@ -448,6 +468,43 @@
             .proj-summary { grid-template-columns: 1fr; }
             .funnel-label { min-width: 70px; }
             .tooltip { width: 200px; }
+        }
+
+        /* ─── Chart Skeleton & Fallback ──────────────────────────── */
+        .chart-skeleton {
+            display: flex; align-items: flex-end; gap: 8px;
+            height: 100%; padding: 1rem 0;
+        }
+        .skeleton-bar {
+            flex: 1; background: linear-gradient(110deg, var(--border) 30%, var(--border-light) 50%, var(--border) 70%);
+            background-size: 200% 100%;
+            border-radius: 4px 4px 0 0;
+            animation: shimmer 1.5s ease-in-out infinite;
+        }
+        .skeleton-bar:nth-child(1) { height: 40%; }
+        .skeleton-bar:nth-child(2) { height: 55%; }
+        .skeleton-bar:nth-child(3) { height: 70%; }
+        .skeleton-bar:nth-child(4) { height: 85%; }
+        .skeleton-bar:nth-child(5) { height: 60%; }
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        .chart-fallback {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            height: 100%; gap: 0.5rem; color: var(--muted); text-align: center;
+        }
+        .chart-fallback span { font-size: 2rem; }
+        .chart-fallback p { font-size: 0.85rem; line-height: 1.5; }
+        .chart-fallback button {
+            margin-top: 0.5rem; padding: 0.5rem 1.25rem; border-radius: var(--radius-sm);
+            border: 1px solid var(--primary); background: transparent; color: var(--primary);
+            font-size: 0.85rem; cursor: pointer; transition: background 0.2s, color 0.2s;
+        }
+        .chart-fallback button:hover { background: var(--primary); color: white; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .skeleton-bar { animation: none !important; }
         }
 
         /* ─── Print ──────────────────────────────────────────────── */
