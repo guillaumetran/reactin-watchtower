@@ -1081,6 +1081,42 @@ document.getElementById('proj-summary').innerHTML = `
 `;
 } // end initCharts
 
+// ─── Data validation (console warnings for inconsistencies) ─────────
+(function validateData() {
+    const kpiValues = {};
+    document.querySelectorAll('.kpi-card').forEach(card => {
+        const label = (card.querySelector('.kpi-label')?.textContent || '').trim();
+        const value = (card.querySelector('.kpi-value')?.textContent || '').trim();
+        kpiValues[label] = value;
+    });
+    const checks = [];
+    // Check MRR / Paid Subs / ARPU consistency
+    const mrr = parseFloat((kpiValues['MRR 🎉'] || '').replace(/[^0-9.]/g, ''));
+    const subs = parseFloat((kpiValues['Paid Subscribers'] || '').replace(/[^0-9]/g, ''));
+    const arpu = parseFloat((kpiValues['ARPU'] || '').replace(/[^0-9.]/g, ''));
+    if (mrr && subs && arpu) {
+        const computed = Math.round(mrr / subs);
+        if (Math.abs(computed - arpu) > 2) {
+            checks.push('⚠️ ARPU inconsistency: MRR($' + mrr + ')/Subs(' + subs + ') = $' + computed + ', displayed ARPU = $' + arpu);
+        }
+    }
+    // Check funnel: each step should be <= previous
+    const funnelBars = document.querySelectorAll('.funnel-bar');
+    let prevVal = Infinity;
+    funnelBars.forEach(bar => {
+        const val = parseInt(bar.textContent, 10);
+        if (!isNaN(val)) {
+            if (val > prevVal) checks.push('⚠️ Funnel inconsistency: ' + val + ' > previous step ' + prevVal);
+            prevVal = val;
+        }
+    });
+    if (checks.length) {
+        console.group('📋 Watchtower Data Validation');
+        checks.forEach(c => console.warn(c));
+        console.groupEnd();
+    }
+})();
+
 // ─── Comparison mode (MoM deltas in table) ──────────────────────────
 function toggleComparison(enabled) {
     const rows = document.querySelectorAll('.card table tbody tr');
