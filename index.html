@@ -9,6 +9,7 @@
     <meta property="og:description" content="Dashboard de suivi de croissance ReactIn : MRR, subscribers, funnel, SEO, churn et projections.">
     <meta property="og:type" content="website">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔭</text></svg>">
+    <link rel="manifest" href="manifest.json">
     <title>ReactIn Growth Watchtower</title>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
@@ -106,6 +107,10 @@
             }
         }
         initTheme();
+
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js').catch(() => {});
+        }
 
         document.addEventListener('DOMContentLoaded', checkAuth);
     </script>
