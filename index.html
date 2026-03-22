@@ -33,8 +33,10 @@
 
         function showDashboard() {
             document.getElementById('auth-screen').style.display = 'none';
+            document.getElementById('auth-screen').setAttribute('aria-hidden', 'true');
             const db = document.getElementById('dashboard');
             db.style.display = 'block';
+            db.removeAttribute('aria-hidden');
             requestAnimationFrame(() => db.classList.add('visible'));
         }
 
@@ -65,6 +67,12 @@
         /* ─── Reset ───────────────────────────────────────────────── */
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
+        /* ─── Focus ──────────────────────────────────────────────── */
+        :focus-visible {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: var(--bg);
@@ -94,7 +102,7 @@
             border: 1px solid var(--border); background: var(--bg); color: var(--text);
             font-size: 1rem; margin-bottom: 1rem; transition: border-color 0.2s;
         }
-        .auth-box input:focus { outline: none; border-color: var(--primary); }
+        .auth-box input:focus { outline: 2px solid var(--primary); outline-offset: 2px; border-color: var(--primary); }
         .auth-box button {
             width: 100%; padding: 0.875rem; border-radius: var(--radius-sm);
             border: none; background: var(--primary); color: white;
@@ -111,6 +119,13 @@
             40%, 80% { transform: translateX(6px); }
         }
         .shake { animation: shake 0.4s ease; }
+
+        /* ─── Screen-reader only ─────────────────────────────────── */
+        .sr-only {
+            position: absolute; width: 1px; height: 1px;
+            padding: 0; margin: -1px; overflow: hidden;
+            clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+        }
 
         /* ─── Dashboard ───────────────────────────────────────────── */
         #dashboard {
@@ -182,7 +197,9 @@
             left: 50%; transform: translateX(-50%);
             border: 8px solid transparent; border-top-color: var(--border-light);
         }
-        .has-tooltip:hover .tooltip { opacity: 1; visibility: visible; }
+        .has-tooltip:hover .tooltip,
+        .has-tooltip:focus .tooltip,
+        .has-tooltip:focus-within .tooltip { opacity: 1; visibility: visible; }
 
         /* ─── Grid & Cards ────────────────────────────────────────── */
         .grid-2 {
@@ -309,27 +326,29 @@
 <body>
 
 <!-- Auth -->
-<div id="auth-screen">
+<div id="auth-screen" role="dialog" aria-labelledby="auth-title">
     <div class="auth-box">
-        <h2>🔭 ReactIn Watchtower</h2>
-        <p>Entrez le mot de passe pour accéder au dashboard</p>
+        <h2 id="auth-title">🔭 ReactIn Watchtower</h2>
+        <p id="auth-desc">Entrez le mot de passe pour accéder au dashboard</p>
+        <label for="password-input" class="sr-only">Mot de passe</label>
         <input type="password" id="password-input" placeholder="Mot de passe"
+               aria-describedby="auth-desc error-msg"
                onkeypress="if(event.key==='Enter')submitPassword()">
-        <button onclick="submitPassword()">Accéder</button>
-        <p class="error-msg" id="error-msg">Mot de passe incorrect</p>
+        <button type="button" onclick="submitPassword()">Accéder</button>
+        <p class="error-msg" id="error-msg" role="alert" aria-live="assertive">Mot de passe incorrect</p>
     </div>
 </div>
 
 <!-- Dashboard -->
-<div id="dashboard">
+<main id="dashboard" aria-hidden="true">
 
-    <header>
+    <header role="banner">
         <h1>🔭 ReactIn Growth Watchtower</h1>
-        <span class="date-badge">📅 Mis à jour le 13 Mars 2026</span>
+        <span class="date-badge" aria-label="Mis à jour le 13 Mars 2026">📅 Mis à jour le 13 Mars 2026</span>
     </header>
 
     <!-- KPI Cards -->
-    <div class="kpi-grid kpi-grid--7">
+    <section class="kpi-grid kpi-grid--7" aria-label="Indicateurs clés de performance">
         <div class="kpi-card kpi-card--highlight">
             <div class="kpi-label">MRR 🎉</div>
             <div class="kpi-value">$6,197 <span class="mtd-badge">MTD</span></div>
@@ -355,11 +374,11 @@
             <div class="kpi-value">61</div>
             <div class="kpi-change kpi-change--up">MTD (proj. ~145)</div>
         </div>
-        <div class="kpi-card has-tooltip">
-            <div class="kpi-label">NRR (Mar MTD) <span class="info-icon">ⓘ</span></div>
+        <div class="kpi-card has-tooltip" tabindex="0" aria-describedby="tooltip-nrr">
+            <div class="kpi-label">NRR (Mar MTD) <span class="info-icon" aria-hidden="true">ⓘ</span></div>
             <div class="kpi-value">109%</div>
             <div class="kpi-change kpi-change--up">✓ expansion &gt; churn</div>
-            <div class="tooltip">
+            <div class="tooltip" id="tooltip-nrr" role="tooltip">
                 <strong>Net Revenue Retention</strong><br><br>
                 Expansion: +$299 (7 users)<br>
                 Churn: –$340 (8 users)<br><br>
@@ -367,11 +386,11 @@
                 &lt;100% = churn &gt; expansion ⚠️
             </div>
         </div>
-        <div class="kpi-card has-tooltip">
-            <div class="kpi-label">Score GEO <span class="info-icon">ⓘ</span></div>
+        <div class="kpi-card has-tooltip" tabindex="0" aria-describedby="tooltip-geo">
+            <div class="kpi-label">Score GEO <span class="info-icon" aria-hidden="true">ⓘ</span></div>
             <div class="kpi-value">57</div>
             <div class="kpi-change kpi-change--up">+5 pts vs Feb 📈</div>
-            <div class="tooltip">
+            <div class="tooltip" id="tooltip-geo" role="tooltip">
                 <strong>GEO Score (Generative Engine Optimization)</strong><br><br>
                 Visibilité dans les AIs (ChatGPT, Gemini, etc.)<br><br>
                 Mars: 57/100<br>
@@ -379,17 +398,17 @@
                 Les AIs recommandent de plus en plus ReactIn ! 🤖
             </div>
         </div>
-    </div>
+    </section>
 
     <!-- Charts -->
     <div class="grid-2">
         <div class="card">
             <h2>📈 MRR Evolution</h2>
-            <div class="chart-container"><canvas id="mrrChart"></canvas></div>
+            <div class="chart-container"><canvas id="mrrChart" aria-label="Graphique de l'évolution du MRR" role="img"></canvas></div>
         </div>
         <div class="card">
             <h2>👥 Paid Subscribers</h2>
-            <div class="chart-container"><canvas id="subsChart"></canvas></div>
+            <div class="chart-container"><canvas id="subsChart" aria-label="Graphique des abonnés payants" role="img"></canvas></div>
         </div>
     </div>
 
@@ -477,69 +496,69 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Métrique</th>
-                        <th>Sept</th>
-                        <th>Oct</th>
-                        <th>Nov</th>
-                        <th>Déc</th>
-                        <th>Jan</th>
-                        <th>Feb</th>
-                        <th>Mar MTD</th>
+                        <th scope="col">Métrique</th>
+                        <th scope="col">Sept</th>
+                        <th scope="col">Oct</th>
+                        <th scope="col">Nov</th>
+                        <th scope="col">Déc</th>
+                        <th scope="col">Jan</th>
+                        <th scope="col">Feb</th>
+                        <th scope="col">Mar MTD</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>SEO Impressions</td>
+                        <th scope="row">SEO Impressions</th>
                         <td>15,626</td><td>10,344</td><td>12,161</td><td>10,709</td><td>34,814</td><td>39,791</td>
                         <td class="highlight-cell">~95K proj. 🚀</td>
                     </tr>
                     <tr>
-                        <td>LP Views</td>
+                        <th scope="row">LP Views</th>
                         <td>–</td><td>~3,400</td><td>~1,900</td><td>~2,000</td><td>2,200</td><td>2,450</td>
                         <td class="highlight-cell">1,000</td>
                     </tr>
                     <tr>
-                        <td>LP Conversion</td>
+                        <th scope="row">LP Conversion</th>
                         <td>–</td><td>3.9%</td><td>5.8%</td><td>3.45%</td><td>4.1%</td><td>4.4%</td>
                         <td class="highlight-cell">6.1%</td>
                     </tr>
                     <tr>
-                        <td>Signups</td>
+                        <th scope="row">Signups</th>
                         <td>92</td><td>134</td><td>110</td><td>69</td><td>90</td><td>109</td>
                         <td class="highlight-cell">61 (~145 proj.)</td>
                     </tr>
                     <tr>
-                        <td>Activation Rate</td>
+                        <th scope="row">Activation Rate</th>
                         <td>62%</td><td>65%</td><td>78%</td><td>–</td><td>54%</td><td>39%</td>
                         <td class="highlight-cell">67% 📈</td>
                     </tr>
                     <tr>
-                        <td>MRR</td>
+                        <th scope="row">MRR</th>
                         <td>$2,497</td><td>$3,264</td><td>$4,322</td><td>$4,765</td><td>$5,431</td><td>$5,678</td>
                         <td class="highlight-cell">$6,197 🎉</td>
                     </tr>
                     <tr>
-                        <td>Paid Subs</td>
+                        <th scope="row">Paid Subs</th>
                         <td>–</td><td>80</td><td>86</td><td>92</td><td>100</td><td>107</td>
                         <td class="highlight-cell">109</td>
                     </tr>
                     <tr>
-                        <td>ARPU</td>
+                        <th scope="row">ARPU</th>
                         <td>–</td><td>$41</td><td>$50</td><td>$52</td><td>$54</td><td>$53</td>
                         <td class="highlight-cell">$57 📈</td>
                     </tr>
                     <tr>
-                        <td>Churn (clients)</td>
+                        <th scope="row">Churn (clients)</th>
                         <td>8</td><td>7</td><td>15</td><td>10</td><td>12</td><td>15</td>
                         <td class="highlight-cell">8</td>
                     </tr>
                     <tr>
-                        <td>Churn (%)</td>
+                        <th scope="row">Churn (%)</th>
                         <td>–</td><td>9.7%</td><td>18.8%</td><td>11.6%</td><td>13.0%</td><td>14.0%</td>
                         <td class="highlight-cell">7.3% ↓</td>
                     </tr>
                     <tr>
-                        <td>GEO Score</td>
+                        <th scope="row">GEO Score</th>
                         <td>–</td><td>–</td><td>–</td><td>–</td><td>–</td><td>52</td>
                         <td class="highlight-cell">57 📈</td>
                     </tr>
@@ -552,13 +571,13 @@
     <div class="card section-gap">
         <h2>🔮 Projection MRR (12 mois)</h2>
         <p class="card__subtitle">Basé sur la croissance récente MoM (~9% – moyenne Nov–Mar)</p>
-        <div class="chart-container chart-container--tall"><canvas id="projectionChart"></canvas></div>
+        <div class="chart-container chart-container--tall"><canvas id="projectionChart" aria-label="Graphique de projection MRR sur 12 mois" role="img"></canvas></div>
         <div class="proj-summary" id="proj-summary"><!-- Filled by JS --></div>
         <p class="proj-note">📊 Projection conservatrice basée sur le taux de croissance récent (9% MoM vs 21% historique)</p>
     </div>
 
     <!-- Alerts -->
-    <div class="alerts">
+    <section class="alerts" aria-label="Alertes et faits marquants">
         <div class="alert alert--success">
             <strong>🎉 MILESTONE: MRR &gt; $6K !</strong>
             $6,197 – Premier passage au-dessus des $6K !
@@ -587,11 +606,11 @@
             <strong>⚠️ Premium MTD: 2</strong>
             À surveiller sur le reste du mois.
         </div>
-    </div>
+    </section>
 
-    <footer>ReactIn Growth Watchtower · Généré par Rufus 🐕 &amp; Clawd 🦫</footer>
+    <footer role="contentinfo">ReactIn Growth Watchtower · Généré par Rufus 🐕 &amp; Clawd 🦫</footer>
 
-</div>
+</main>
 
 <script>
 // ─── Chart Defaults ─────────────────────────────────────────────────
