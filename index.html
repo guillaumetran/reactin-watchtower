@@ -610,9 +610,10 @@
         <p id="auth-desc">Entrez le mot de passe pour accéder au dashboard</p>
         <label for="password-input" class="sr-only">Mot de passe</label>
         <input type="password" id="password-input" placeholder="Mot de passe"
-               aria-describedby="auth-desc error-msg"
+               aria-describedby="auth-desc error-msg" autofocus
                onkeypress="if(event.key==='Enter')submitPassword()">
         <button type="button" onclick="submitPassword()">Accéder</button>
+        <p style="color: var(--muted); font-size: 0.75rem; margin-top: 0.75rem; opacity: 0.7;">Appuyez sur Entrée pour valider</p>
         <p class="error-msg" id="error-msg" role="alert" aria-live="assertive">Mot de passe incorrect</p>
     </div>
 </div>
