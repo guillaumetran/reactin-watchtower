@@ -3,6 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dashboard de suivi de croissance ReactIn : MRR, subscribers, funnel, SEO, churn et projections.">
+    <meta name="theme-color" content="#0f172a">
+    <meta property="og:title" content="ReactIn Growth Watchtower">
+    <meta property="og:description" content="Dashboard de suivi de croissance ReactIn : MRR, subscribers, funnel, SEO, churn et projections.">
+    <meta property="og:type" content="website">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔭</text></svg>">
     <title>ReactIn Growth Watchtower</title>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
@@ -194,14 +200,13 @@
         .kpi-card { opacity: 0; }
         #dashboard.visible .kpi-card { animation: fadeSlideUp 0.4s ease forwards; }
 
-        /* Stagger KPI cards */
-        #dashboard.visible .kpi-card:nth-child(1) { animation-delay: 0.05s; }
-        #dashboard.visible .kpi-card:nth-child(2) { animation-delay: 0.1s; }
-        #dashboard.visible .kpi-card:nth-child(3) { animation-delay: 0.15s; }
-        #dashboard.visible .kpi-card:nth-child(4) { animation-delay: 0.2s; }
-        #dashboard.visible .kpi-card:nth-child(5) { animation-delay: 0.25s; }
-        #dashboard.visible .kpi-card:nth-child(6) { animation-delay: 0.3s; }
-        #dashboard.visible .kpi-card:nth-child(7) { animation-delay: 0.35s; }
+        /* Stagger KPI cards via CSS counter */
+        .kpi-card { --i: 0; }
+        .kpi-card:nth-child(1) { --i: 1; } .kpi-card:nth-child(2) { --i: 2; }
+        .kpi-card:nth-child(3) { --i: 3; } .kpi-card:nth-child(4) { --i: 4; }
+        .kpi-card:nth-child(5) { --i: 5; } .kpi-card:nth-child(6) { --i: 6; }
+        .kpi-card:nth-child(7) { --i: 7; }
+        #dashboard.visible .kpi-card { animation-delay: calc(var(--i) * 0.05s); }
 
         /* Cards animate when observed */
         .card, .alert { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
@@ -277,7 +282,6 @@
         .funnel-bar {
             height: 32px; border-radius: 4px; display: flex; align-items: center;
             padding: 0 1rem; font-weight: 600; font-size: 0.85rem; min-width: 60px;
-            transition: width 0.6s ease;
         }
         .funnel-bar--primary { background: linear-gradient(90deg, var(--primary), var(--primary-light)); }
         .funnel-bar--success { background: var(--success); }
@@ -444,6 +448,20 @@
             .proj-summary { grid-template-columns: 1fr; }
             .funnel-label { min-width: 70px; }
             .tooltip { width: 200px; }
+        }
+
+        /* ─── Print ──────────────────────────────────────────────── */
+        @media print {
+            body { background: #fff; color: #000; padding: 0.5cm; }
+            #auth-screen { display: none !important; }
+            #dashboard { display: block !important; opacity: 1 !important; transform: none !important; }
+            .kpi-card, .card, .alert { opacity: 1 !important; transform: none !important; animation: none !important;
+                break-inside: avoid; border-color: #ccc; background: #fff; box-shadow: none; }
+            .kpi-card--highlight { background: #f0f0ff; }
+            .chart-container { height: auto; }
+            .tooltip { display: none; }
+            footer { margin-top: 1rem; }
+            :root { --text: #000; --muted: #555; --card: #fff; --border: #ccc; --bg: #fff; }
         }
     </style>
 </head>
@@ -739,14 +757,22 @@
 <script>
 // ─── Charts (lazy-loaded after auth) ────────────────────────────────
 function initCharts() {
+// ─── Shared palette ─────────────────────────────────────────────────
+const C = {
+    primary: '#6366f1', success: '#10b981', successLight: '#34d399',
+    danger: '#ef4444', muted: '#94a3b8', slate: '#475569', slateLight: '#64748b',
+    grid: 'rgba(255,255,255,0.05)',
+    primaryFill: 'rgba(99, 102, 241, 0.1)',
+    successFill: 'rgba(16, 185, 129, 0.1)',
+    dangerFill: 'rgba(239, 68, 68, 0.05)',
+};
+
+const defaultScale = { grid: { color: C.grid }, ticks: { color: C.muted } };
 const chartDefaults = {
     responsive: true,
     maintainAspectRatio: false,
     plugins: { legend: { display: false } },
-    scales: {
-        x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } },
-        y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } }
-    }
+    scales: { x: { ...defaultScale }, y: { ...defaultScale } }
 };
 
 const months = ['Sept', 'Oct', 'Nov', 'Déc', 'Jan', 'Fév', 'Mar'];
@@ -758,10 +784,10 @@ new Chart(document.getElementById('mrrChart'), {
         labels: months,
         datasets: [{
             data: [2497, 3264, 4322, 4765, 5431, 5678, 6197],
-            borderColor: '#6366f1',
-            backgroundColor: 'rgba(99, 102, 241, 0.1)',
+            borderColor: C.primary,
+            backgroundColor: C.primaryFill,
             fill: true, tension: 0.4,
-            pointBackgroundColor: ['#6366f1','#6366f1','#6366f1','#6366f1','#6366f1','#6366f1','#10b981'],
+            pointBackgroundColor: [C.primary,C.primary,C.primary,C.primary,C.primary,C.primary,C.success],
             pointRadius: [6, 6, 6, 6, 6, 6, 10],
             pointHoverRadius: 10
         }]
@@ -782,8 +808,8 @@ new Chart(document.getElementById('subsChart'), {
         labels: months,
         datasets: [{
             data: [72, 80, 86, 92, 100, 107, 109],
-            backgroundColor: ['#475569','#475569','#475569','#475569','#475569','#475569','#10b981'],
-            hoverBackgroundColor: ['#64748b','#64748b','#64748b','#64748b','#64748b','#64748b','#34d399'],
+            backgroundColor: [C.slate,C.slate,C.slate,C.slate,C.slate,C.slate,C.success],
+            hoverBackgroundColor: [C.slateLight,C.slateLight,C.slateLight,C.slateLight,C.slateLight,C.slateLight,C.successLight],
             borderRadius: 6
         }]
     },
@@ -809,23 +835,23 @@ new Chart(document.getElementById('projectionChart'), {
             {
                 label: `MRR Projeté (${Math.round(GROWTH * 100)}% MoM)`,
                 data: projMRR,
-                borderColor: '#10b981', backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                borderColor: C.success, backgroundColor: C.successFill,
                 fill: true, tension: 0.4,
-                pointBackgroundColor: '#10b981', pointRadius: 4, pointHoverRadius: 6
+                pointBackgroundColor: C.success, pointRadius: 4, pointHoverRadius: 6
             },
             {
                 label: 'Objectif',
                 data: objectifs,
-                borderColor: '#ef4444', backgroundColor: 'rgba(239, 68, 68, 0.05)',
+                borderColor: C.danger, backgroundColor: C.dangerFill,
                 fill: false, tension: 0.4,
-                pointBackgroundColor: '#ef4444', pointRadius: 4,
+                pointBackgroundColor: C.danger, pointRadius: 4,
                 borderDash: [5, 5]
             }
         ]
     },
     options: {
         ...chartDefaults,
-        plugins: { legend: { display: true, labels: { color: '#94a3b8' } } },
+        plugins: { legend: { display: true, labels: { color: C.muted } } },
         scales: {
             ...chartDefaults.scales,
             y: { ...chartDefaults.scales.y, ticks: { ...chartDefaults.scales.y.ticks, callback: v => '$' + (v / 1000).toFixed(0) + 'K' } }
