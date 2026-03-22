@@ -38,6 +38,14 @@
             db.style.display = 'block';
             db.removeAttribute('aria-hidden');
             requestAnimationFrame(() => db.classList.add('visible'));
+            setTimeout(onDashboardReady, 100);
+        }
+        function onDashboardReady() {
+            if (typeof startKPICounters === 'function') {
+                startKPICounters();
+                animateFunnelBars();
+                setupScrollReveal();
+            }
         }
 
         document.addEventListener('DOMContentLoaded', checkAuth);
@@ -163,6 +171,40 @@
             transition: transform 0.15s ease, box-shadow 0.15s ease;
         }
         .kpi-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+
+        /* ─── Entrance animations ────────────────────────────────── */
+        @keyframes fadeSlideUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-in {
+            opacity: 0;
+            animation: fadeSlideUp 0.5s ease forwards;
+        }
+        .kpi-card { opacity: 0; }
+        #dashboard.visible .kpi-card { animation: fadeSlideUp 0.4s ease forwards; }
+
+        /* Stagger KPI cards */
+        #dashboard.visible .kpi-card:nth-child(1) { animation-delay: 0.05s; }
+        #dashboard.visible .kpi-card:nth-child(2) { animation-delay: 0.1s; }
+        #dashboard.visible .kpi-card:nth-child(3) { animation-delay: 0.15s; }
+        #dashboard.visible .kpi-card:nth-child(4) { animation-delay: 0.2s; }
+        #dashboard.visible .kpi-card:nth-child(5) { animation-delay: 0.25s; }
+        #dashboard.visible .kpi-card:nth-child(6) { animation-delay: 0.3s; }
+        #dashboard.visible .kpi-card:nth-child(7) { animation-delay: 0.35s; }
+
+        /* Cards animate when observed */
+        .card, .alert { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+        .card.revealed, .alert.revealed { opacity: 1; transform: translateY(0); }
+
+        /* Funnel bars animate width */
+        .funnel-bar { transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
+
+        /* Respect reduced motion preference */
+        @media (prefers-reduced-motion: reduce) {
+            .animate-in, .kpi-card, .card, .alert { animation: none !important; opacity: 1 !important; transform: none !important; transition: none !important; }
+            .funnel-bar { transition: none !important; }
+        }
         .kpi-card--highlight {
             border-color: var(--primary);
             background: linear-gradient(135deg, var(--card) 0%, #312e81 100%);
@@ -808,6 +850,84 @@ document.getElementById('proj-summary').innerHTML = `
         <div class="proj-box__sub">Mar 2027</div>
     </div>
 `;
+
+// ─── Micro-interactions ─────────────────────────────────────────────
+
+// Animated number counters on KPI values
+function animateCounter(el, target, prefix, suffix, duration) {
+    const start = performance.now();
+    const initial = 0;
+    function step(now) {
+        const t = Math.min((now - start) / duration, 1);
+        const ease = 1 - Math.pow(1 - t, 3); // easeOutCubic
+        const current = Math.round(initial + (target - initial) * ease);
+        el.textContent = prefix + current.toLocaleString() + suffix;
+        if (t < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+}
+
+function parseKPIValue(text) {
+    const clean = text.replace(/\s+/g, ' ').trim();
+    const prefix = clean.match(/^([^0-9]*)/)?.[1] || '';
+    const numMatch = clean.match(/[\d,]+/);
+    if (!numMatch) return null;
+    const num = parseInt(numMatch[0].replace(/,/g, ''), 10);
+    const afterNum = clean.slice(clean.indexOf(numMatch[0]) + numMatch[0].length);
+    return { prefix, num, suffix: afterNum };
+}
+
+function startKPICounters() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    document.querySelectorAll('.kpi-value').forEach((el, i) => {
+        const parsed = parseKPIValue(el.textContent);
+        if (!parsed) return;
+        const originalText = el.innerHTML;
+        // Only animate the number portion, keep HTML (badges etc.) intact
+        const spanMatch = el.innerHTML.match(/(<span.*<\/span>)/);
+        const htmlSuffix = spanMatch ? ' ' + spanMatch[1] : '';
+        animateCounter(el, parsed.num, parsed.prefix, parsed.suffix.replace(/<.*/, ''), 800 + i * 100);
+        // Restore HTML suffix (like MTD badge) after animation
+        if (htmlSuffix) {
+            setTimeout(() => { el.innerHTML = el.textContent + htmlSuffix; }, 900 + i * 100);
+        }
+    });
+}
+
+// Funnel bars: start at 0 width, animate to final width
+function animateFunnelBars() {
+    const bars = document.querySelectorAll('.funnel-bar');
+    const widths = [];
+    bars.forEach(bar => {
+        widths.push(bar.style.width);
+        bar.style.width = '0%';
+    });
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            bars.forEach((bar, i) => {
+                setTimeout(() => { bar.style.width = widths[i]; }, i * 120);
+            });
+        });
+    });
+}
+
+// IntersectionObserver for cards and alerts entrance
+function setupScrollReveal() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.card, .alert').forEach((el, i) => {
+        el.style.transitionDelay = (i % 4) * 0.08 + 's';
+        observer.observe(el);
+    });
+}
+
 </script>
 </body>
 </html>
