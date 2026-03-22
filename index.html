@@ -244,9 +244,9 @@
         .kpi-card {
             background: var(--card); border-radius: var(--radius); padding: 1.25rem;
             border: 1px solid var(--border);
-            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
         }
-        .kpi-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+        .kpi-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(99,102,241,0.15); border-color: var(--primary); }
         .kpi-card[data-target] { cursor: pointer; }
         .kpi-card[data-target]:active { transform: translateY(0); }
 
@@ -330,7 +330,9 @@
         .card {
             background: var(--card); border-radius: var(--radius);
             padding: 1.5rem; border: 1px solid var(--border);
+            transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.2s ease, border-color 0.2s ease;
         }
+        .card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.15); border-color: var(--border-light); }
         .card h2 { font-size: 1rem; font-weight: 600; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
         .card__subtitle { color: var(--muted); font-size: 0.8rem; margin-bottom: 1rem; }
         .section-gap { margin-bottom: 1.5rem; }
@@ -395,7 +397,8 @@
             font-size: 0.7rem; letter-spacing: 0.05em;
             position: sticky; top: 0; background: var(--card);
         }
-        tr:hover td { background: rgba(255,255,255,0.02); }
+        tr { transition: background 0.15s ease; }
+        tr:hover td { background: rgba(99,102,241,0.05); }
         .highlight-cell { color: var(--primary-light); font-weight: 600; }
 
         /* ─── Projection Summary ──────────────────────────────────── */
@@ -420,6 +423,8 @@
             gap: 1rem;
         }
         .alert { padding: 1rem 1.25rem; border-radius: var(--radius-sm); font-size: 0.9rem; line-height: 1.5; }
+        .alert { transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.2s ease; }
+        .alert:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
         .alert strong { display: block; margin-bottom: 0.25rem; }
         .alert--success { background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); color: var(--success-light); }
         .alert--warning { background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); color: var(--warning-light); }
