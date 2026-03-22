@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ReactIn Growth Watchtower</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
     <script>
         // ─── Auth ────────────────────────────────────────────────────
         const PASS_HASH = '37eb841a6f113cb3897d955e357e9f618ba2dcecaf46593dfa1266b36460dc7d';
@@ -39,6 +40,15 @@
             db.removeAttribute('aria-hidden');
             requestAnimationFrame(() => db.classList.add('visible'));
             setTimeout(onDashboardReady, 100);
+            loadChartJS();
+        }
+        function loadChartJS() {
+            if (window.Chart) { initCharts(); return; }
+            const s = document.createElement('script');
+            s.src = 'https://cdn.jsdelivr.net/npm/chart.js';
+            s.async = true;
+            s.onload = initCharts;
+            document.head.appendChild(s);
         }
         function onDashboardReady() {
             if (typeof startKPICounters === 'function') {
@@ -727,7 +737,8 @@
 </main>
 
 <script>
-// ─── Chart Defaults ─────────────────────────────────────────────────
+// ─── Charts (lazy-loaded after auth) ────────────────────────────────
+function initCharts() {
 const chartDefaults = {
     responsive: true,
     maintainAspectRatio: false,
@@ -850,6 +861,7 @@ document.getElementById('proj-summary').innerHTML = `
         <div class="proj-box__sub">Mar 2027</div>
     </div>
 `;
+} // end initCharts
 
 // ─── Micro-interactions ─────────────────────────────────────────────
 
