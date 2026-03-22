@@ -435,6 +435,28 @@
         .alert--warning { background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); color: var(--warning-light); }
         .alert--danger { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); color: var(--danger-light); }
 
+        /* ─── Comparison Toggle ──────────────────────────────────── */
+        .compare-toggle {
+            display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;
+        }
+        .compare-toggle input[type="checkbox"] {
+            appearance: none; -webkit-appearance: none;
+            width: 36px; height: 20px; background: var(--border);
+            border-radius: 10px; position: relative; cursor: pointer;
+            transition: background 0.2s;
+        }
+        .compare-toggle input[type="checkbox"]::after {
+            content: ''; position: absolute; top: 2px; left: 2px;
+            width: 16px; height: 16px; background: white;
+            border-radius: 50%; transition: transform 0.2s;
+        }
+        .compare-toggle input[type="checkbox"]:checked { background: var(--primary); }
+        .compare-toggle input[type="checkbox"]:checked::after { transform: translateX(16px); }
+        .compare-toggle label { font-size: 0.8rem; color: var(--muted); cursor: pointer; }
+        .delta-positive { color: var(--success); font-size: 0.7rem; }
+        .delta-negative { color: var(--danger); font-size: 0.7rem; }
+        .delta-neutral { color: var(--muted); font-size: 0.7rem; }
+
         /* ─── Back to Top ────────────────────────────────────────── */
         .back-to-top {
             position: fixed; bottom: 2rem; right: 2rem; z-index: 50;
@@ -781,6 +803,10 @@
     <!-- Historical Table -->
     <div class="card section-gap">
         <h2>📊 Historique Mensuel</h2>
+        <div class="compare-toggle">
+            <input type="checkbox" id="compare-toggle" onchange="toggleComparison(this.checked)">
+            <label for="compare-toggle">Afficher les variations MoM</label>
+        </div>
         <div class="table-container">
             <table>
                 <thead>
@@ -1037,6 +1063,35 @@ document.getElementById('proj-summary').innerHTML = `
     </div>
 `;
 } // end initCharts
+
+// ─── Comparison mode (MoM deltas in table) ──────────────────────────
+function toggleComparison(enabled) {
+    const rows = document.querySelectorAll('.card table tbody tr');
+    rows.forEach(row => {
+        const cells = row.querySelectorAll('td');
+        cells.forEach(cell => {
+            const existing = cell.querySelector('.delta');
+            if (existing) existing.remove();
+        });
+        if (!enabled) return;
+        const allCells = [row.querySelector('th'), ...cells];
+        for (let i = 2; i < allCells.length; i++) {
+            const curr = parseFloat((allCells[i].textContent.match(/[\d,.]+/) || [''])[0].replace(/,/g, ''));
+            const prev = parseFloat((allCells[i-1].textContent.match(/[\d,.]+/) || [''])[0].replace(/,/g, ''));
+            if (isNaN(curr) || isNaN(prev) || prev === 0) continue;
+            const pct = ((curr - prev) / prev * 100).toFixed(0);
+            const isChurnRow = allCells[0] && /churn/i.test(allCells[0].textContent);
+            let cls;
+            if (pct > 0) cls = isChurnRow ? 'delta-negative' : 'delta-positive';
+            else if (pct < 0) cls = isChurnRow ? 'delta-positive' : 'delta-negative';
+            else cls = 'delta-neutral';
+            const span = document.createElement('span');
+            span.className = 'delta ' + cls;
+            span.textContent = ' (' + (pct > 0 ? '+' : '') + pct + '%)';
+            allCells[i].appendChild(span);
+        }
+    });
+}
 
 // ─── Back to top visibility ──────────────────────────────────────────
 (function() {
