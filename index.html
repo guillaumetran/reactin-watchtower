@@ -247,6 +247,8 @@
             transition: transform 0.15s ease, box-shadow 0.15s ease;
         }
         .kpi-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+        .kpi-card[data-target] { cursor: pointer; }
+        .kpi-card[data-target]:active { transform: translateY(0); }
 
         /* ─── Entrance animations ────────────────────────────────── */
         @keyframes fadeSlideUp {
@@ -605,27 +607,27 @@
 
     <!-- KPI Cards -->
     <section class="kpi-grid kpi-grid--7" aria-label="Indicateurs clés de performance">
-        <div class="kpi-card kpi-card--highlight">
+        <div class="kpi-card kpi-card--highlight" data-target="section-mrr" role="button" tabindex="0" aria-label="MRR – cliquez pour voir le graphique">
             <div class="kpi-label">MRR 🎉</div>
             <div class="kpi-value">$6,197 <span class="mtd-badge">MTD</span></div>
             <div class="kpi-change kpi-change--up">+9% vs Feb – $6K+ ! 🎉</div>
         </div>
-        <div class="kpi-card">
+        <div class="kpi-card" data-target="section-subs" role="button" tabindex="0" aria-label="Paid Subscribers – cliquez pour voir le graphique">
             <div class="kpi-label">Paid Subscribers</div>
             <div class="kpi-value">109</div>
             <div class="kpi-change kpi-change--up">+2 vs Feb</div>
         </div>
-        <div class="kpi-card">
+        <div class="kpi-card" data-target="section-revenue" role="button" tabindex="0" aria-label="ARPU – cliquez pour voir le breakdown">
             <div class="kpi-label">ARPU</div>
             <div class="kpi-value">$57</div>
             <div class="kpi-change kpi-change--up">+$4 vs Feb</div>
         </div>
-        <div class="kpi-card">
+        <div class="kpi-card" data-target="section-traffic" role="button" tabindex="0" aria-label="SEO Impressions – cliquez pour voir les sources">
             <div class="kpi-label">SEO Impressions</div>
             <div class="kpi-value">~95K</div>
             <div class="kpi-change kpi-change--up">Mar proj. +138% 🚀</div>
         </div>
-        <div class="kpi-card">
+        <div class="kpi-card" data-target="section-funnel" role="button" tabindex="0" aria-label="Signups – cliquez pour voir le funnel">
             <div class="kpi-label">Signups</div>
             <div class="kpi-value">61</div>
             <div class="kpi-change kpi-change--up">MTD (proj. ~145)</div>
@@ -658,11 +660,11 @@
 
     <!-- Charts -->
     <div class="grid-2">
-        <div class="card">
+        <div class="card" id="section-mrr">
             <h2>📈 MRR Evolution</h2>
             <div class="chart-container"><canvas id="mrrChart" aria-label="Graphique de l'évolution du MRR" role="img"></canvas></div>
         </div>
-        <div class="card">
+        <div class="card" id="section-subs">
             <h2>👥 Paid Subscribers</h2>
             <div class="chart-container"><canvas id="subsChart" aria-label="Graphique des abonnés payants" role="img"></canvas></div>
         </div>
@@ -670,7 +672,7 @@
 
     <!-- Funnel & Revenue -->
     <div class="grid-2">
-        <div class="card">
+        <div class="card" id="section-funnel">
             <h2>🎯 Activation Funnel</h2>
             <p class="card__subtitle">Mars MTD (1–13) | <span style="color: var(--primary);">67% LinkedIn connected</span></p>
             <div class="funnel">
@@ -697,7 +699,7 @@
             </div>
             <p class="funnel-note">Activity: 336 lists · ~195 campaigns · ~18K requests · ~5K messages</p>
         </div>
-        <div class="card">
+        <div class="card" id="section-revenue">
             <h2>💰 Revenue Breakdown</h2>
             <p class="card__subtitle">Mars MTD (1–13) | <span style="color: var(--primary);">🎉 MRR &gt; $6K!</span></p>
             <div class="breakdown-grid">
@@ -730,7 +732,7 @@
     </div>
 
     <!-- Traffic Sources -->
-    <div class="card section-gap">
+    <div class="card section-gap" id="section-traffic">
         <h2>🌐 Traffic Sources</h2>
         <p class="card__subtitle">Mars MTD (1–13) | Projection en vert</p>
         <div class="traffic-sources">
@@ -1002,6 +1004,19 @@ document.getElementById('proj-summary').innerHTML = `
     </div>
 `;
 } // end initCharts
+
+// ─── KPI click-to-scroll ─────────────────────────────────────────────
+document.querySelectorAll('.kpi-card[data-target]').forEach(card => {
+    function navigate() {
+        const target = document.getElementById(card.dataset.target);
+        if (!target) return;
+        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        target.style.boxShadow = '0 0 0 2px var(--primary)';
+        setTimeout(() => { target.style.boxShadow = ''; }, 1500);
+    }
+    card.addEventListener('click', navigate);
+    card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); navigate(); } });
+});
 
 // ─── Micro-interactions ─────────────────────────────────────────────
 
