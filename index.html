@@ -356,6 +356,16 @@
         .funnel-bar--primary { background: linear-gradient(90deg, var(--primary), var(--primary-light)); }
         .funnel-bar--success { background: var(--success); }
         .funnel-pct { font-size: 0.85rem; color: var(--muted); white-space: nowrap; }
+        .funnel-step { position: relative; }
+        .funnel-conversion {
+            position: absolute; left: 140px; top: -14px;
+            font-size: 0.65rem; color: var(--warning); opacity: 0;
+            transition: opacity 0.2s; pointer-events: none;
+            white-space: nowrap;
+        }
+        .funnel-step:hover .funnel-conversion { opacity: 1; }
+        @media (max-width: 640px) { .funnel-conversion { left: 100px; } }
+        @media (max-width: 480px) { .funnel-conversion { left: 80px; } }
         .funnel-note { color: var(--muted); font-size: 0.75rem; margin-top: 1rem; }
 
         /* ─── Revenue Breakdown ───────────────────────────────────── */
@@ -736,16 +746,19 @@
                     <span class="funnel-pct">100%</span>
                 </div>
                 <div class="funnel-step">
+                    <span class="funnel-conversion">↓ 67% conversion</span>
                     <span class="funnel-label">LinkedIn Connected</span>
                     <div class="funnel-bar funnel-bar--primary" style="width: 67%;">41</div>
                     <span class="funnel-pct">67%</span>
                 </div>
                 <div class="funnel-step">
+                    <span class="funnel-conversion">↓ 54% conversion</span>
                     <span class="funnel-label">Campaign Running</span>
                     <div class="funnel-bar funnel-bar--primary" style="width: 36%;">22</div>
                     <span class="funnel-pct">36%</span>
                 </div>
                 <div class="funnel-step">
+                    <span class="funnel-conversion">↓ 9% conversion</span>
                     <span class="funnel-label">Premium</span>
                     <div class="funnel-bar funnel-bar--success" style="width: 5%;">2</div>
                     <span class="funnel-pct">3%</span>
