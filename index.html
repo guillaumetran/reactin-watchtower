@@ -84,6 +84,29 @@
             }
         }
 
+        function toggleTheme() {
+            const html = document.documentElement;
+            const isLight = html.getAttribute('data-theme') === 'light';
+            const newTheme = isLight ? 'dark' : 'light';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('watchtower_theme', newTheme);
+            updateThemeUI(newTheme);
+        }
+        function updateThemeUI(theme) {
+            const icon = document.getElementById('theme-icon');
+            const label = document.getElementById('theme-label');
+            if (icon) icon.textContent = theme === 'light' ? '🌙' : '☀️';
+            if (label) label.textContent = theme === 'light' ? 'Dark' : 'Light';
+        }
+        function initTheme() {
+            const saved = localStorage.getItem('watchtower_theme');
+            if (saved) {
+                document.documentElement.setAttribute('data-theme', saved);
+                updateThemeUI(saved);
+            }
+        }
+        initTheme();
+
         document.addEventListener('DOMContentLoaded', checkAuth);
     </script>
     <style>
@@ -107,6 +130,23 @@
             --radius-sm: 8px;
             --shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
         }
+
+        /* ─── Light Mode ─────────────────────────────────────────── */
+        [data-theme="light"] {
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --border: #e2e8f0;
+            --border-light: #cbd5e1;
+            --text: #1e293b;
+            --muted: #64748b;
+            --shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+        }
+        [data-theme="light"] #auth-screen { background: var(--bg); }
+        [data-theme="light"] .kpi-card--highlight { background: linear-gradient(135deg, var(--card) 0%, #e0e7ff 100%); }
+        [data-theme="light"] .source-badge { background: rgba(0,0,0,0.04); }
+        [data-theme="light"] .source-badge:hover { background: rgba(0,0,0,0.07); }
+        [data-theme="light"] .breakdown-item { background: rgba(0,0,0,0.03); }
+        [data-theme="light"] tr:hover td { background: rgba(0,0,0,0.02); }
 
         /* ─── Reset ───────────────────────────────────────────────── */
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -383,6 +423,16 @@
         .alert--warning { background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); color: var(--warning-light); }
         .alert--danger { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); color: var(--danger-light); }
 
+        /* ─── Theme Toggle ───────────────────────────────────────── */
+        .theme-toggle {
+            background: var(--card); border: 1px solid var(--border); border-radius: 20px;
+            padding: 0.4rem 0.75rem; cursor: pointer; font-size: 1rem;
+            color: var(--text); display: flex; align-items: center; gap: 0.4rem;
+            transition: background 0.2s, border-color 0.2s;
+        }
+        .theme-toggle:hover { border-color: var(--primary); }
+        .theme-toggle__label { font-size: 0.75rem; color: var(--muted); }
+
         /* ─── Footer ──────────────────────────────────────────────── */
         footer {
             margin-top: 3rem; padding-top: 1rem;
@@ -519,6 +569,7 @@
             .tooltip { display: none; }
             footer { margin-top: 1rem; }
             :root { --text: #000; --muted: #555; --card: #fff; --border: #ccc; --bg: #fff; }
+            .theme-toggle { display: none; }
         }
     </style>
 </head>
@@ -543,7 +594,13 @@
 
     <header role="banner">
         <h1>🔭 ReactIn Growth Watchtower</h1>
-        <span class="date-badge" aria-label="Mis à jour le 13 Mars 2026">📅 Mis à jour le 13 Mars 2026</span>
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <span class="date-badge" aria-label="Mis à jour le 13 Mars 2026">📅 Mis à jour le 13 Mars 2026</span>
+            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Basculer le thème clair/sombre" title="Changer de thème">
+                <span id="theme-icon">☀️</span>
+                <span class="theme-toggle__label" id="theme-label">Light</span>
+            </button>
+        </div>
     </header>
 
     <!-- KPI Cards -->
