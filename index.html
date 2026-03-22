@@ -425,6 +425,22 @@
         .alert--warning { background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); color: var(--warning-light); }
         .alert--danger { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); color: var(--danger-light); }
 
+        /* ─── Back to Top ────────────────────────────────────────── */
+        .back-to-top {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 50;
+            width: 44px; height: 44px; border-radius: 50%;
+            background: var(--primary); color: white; border: none;
+            font-size: 1.2rem; cursor: pointer; display: flex;
+            align-items: center; justify-content: center;
+            opacity: 0; transform: translateY(10px);
+            transition: opacity 0.3s, transform 0.3s, background 0.2s;
+            pointer-events: none;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+        .back-to-top.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+        .back-to-top:hover { background: var(--primary-light); }
+        @media print { .back-to-top { display: none; } }
+
         /* ─── Theme Toggle ───────────────────────────────────────── */
         .theme-toggle {
             background: var(--card); border: 1px solid var(--border); border-radius: 20px;
@@ -870,6 +886,8 @@
 
 </main>
 
+<button class="back-to-top" id="back-to-top" aria-label="Retour en haut de page" title="Retour en haut" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
 <script>
 // ─── Charts (lazy-loaded after auth) ────────────────────────────────
 function initCharts() {
@@ -1004,6 +1022,22 @@ document.getElementById('proj-summary').innerHTML = `
     </div>
 `;
 } // end initCharts
+
+// ─── Back to top visibility ──────────────────────────────────────────
+(function() {
+    const btn = document.getElementById('back-to-top');
+    if (!btn) return;
+    let ticking = false;
+    window.addEventListener('scroll', function() {
+        if (!ticking) {
+            requestAnimationFrame(function() {
+                btn.classList.toggle('visible', window.scrollY > 400);
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }, { passive: true });
+})();
 
 // ─── KPI click-to-scroll ─────────────────────────────────────────────
 document.querySelectorAll('.kpi-card[data-target]').forEach(card => {
