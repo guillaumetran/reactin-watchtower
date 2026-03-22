@@ -66,6 +66,7 @@
 
         /* ─── Reset ───────────────────────────────────────────────── */
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { -webkit-text-size-adjust: 100%; }
 
         /* ─── Focus ──────────────────────────────────────────────── */
         :focus-visible {
@@ -261,7 +262,13 @@
         .source-badge--proj .count { color: var(--success); }
 
         /* ─── Table ───────────────────────────────────────────────── */
-        .table-container { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        .table-container {
+            overflow-x: auto; -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin; scrollbar-color: var(--border) transparent;
+        }
+        .table-container::-webkit-scrollbar { height: 6px; }
+        .table-container::-webkit-scrollbar-track { background: transparent; }
+        .table-container::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
         table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
         th, td { padding: 0.75rem; text-align: right; border-bottom: 1px solid var(--border); }
         th:first-child, td:first-child { text-align: left; }
@@ -308,18 +315,83 @@
         }
 
         /* ─── Responsive ──────────────────────────────────────────── */
+
+        /* Tablet landscape / small desktop */
+        @media (max-width: 1024px) {
+            .kpi-grid--7 { grid-template-columns: repeat(4, 1fr); }
+            .proj-summary { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        /* Tablet portrait */
+        @media (max-width: 768px) {
+            body { padding: 1.25rem; }
+            h1 { font-size: 1.4rem; }
+            .kpi-grid--7 { grid-template-columns: repeat(2, 1fr); }
+            .kpi-value { font-size: 1.5rem; }
+            .chart-container { height: 220px; }
+            .chart-container--tall { height: 260px; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .breakdown-grid { grid-template-columns: 1fr; }
+            .alerts { grid-template-columns: 1fr; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 0.6rem 0.4rem; }
+            .tooltip { width: 240px; }
+        }
+
+        /* Large phone */
         @media (max-width: 640px) {
             body { padding: 1rem; }
             h1 { font-size: 1.25rem; }
             header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
             .kpi-value { font-size: 1.4rem; }
             .funnel-label { min-width: 100px; font-size: 0.75rem; }
-            .breakdown-grid { grid-template-columns: 1fr; }
+            .funnel-bar { height: 28px; font-size: 0.8rem; padding: 0 0.75rem; }
             .traffic-sources { flex-direction: column; }
+            .source-badge { padding: 0.625rem 1rem; min-height: 44px; }
             table { font-size: 0.7rem; }
             th, td { padding: 0.5rem 0.25rem; }
             .tooltip { left: 0; transform: none; width: 220px; }
             .tooltip::after { left: 2rem; }
+            .proj-summary { grid-template-columns: repeat(2, 1fr); }
+            .alert { padding: 0.875rem 1rem; font-size: 0.85rem; }
+        }
+
+        /* Small phone (320px–480px) */
+        @media (max-width: 480px) {
+            body { padding: 0.75rem; }
+            h1 { font-size: 1.1rem; gap: 0.5rem; }
+            .date-badge { font-size: 0.75rem; padding: 0.3rem 0.6rem; }
+            .kpi-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+            .kpi-card { padding: 1rem; }
+            .kpi-label { font-size: 0.7rem; }
+            .kpi-value { font-size: 1.2rem; }
+            .kpi-change { font-size: 0.75rem; }
+            .mtd-badge { font-size: 0.6rem; }
+            .card { padding: 1rem; }
+            .card h2 { font-size: 0.9rem; }
+            .card__subtitle { font-size: 0.75rem; }
+            .chart-container { height: 180px; }
+            .chart-container--tall { height: 220px; }
+            .funnel-step { gap: 0.5rem; }
+            .funnel-label { min-width: 80px; font-size: 0.7rem; }
+            .funnel-bar { height: 26px; font-size: 0.75rem; min-width: 40px; }
+            .funnel-pct { font-size: 0.75rem; }
+            .breakdown-item { padding: 0.625rem; }
+            .breakdown-item .label { font-size: 0.8rem; }
+            .proj-summary { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+            .proj-box { padding: 0.75rem; }
+            .proj-box__value { font-size: 1.25rem; }
+            .proj-box__label { font-size: 0.65rem; }
+            .alert { font-size: 0.8rem; }
+            footer { font-size: 0.7rem; }
+        }
+
+        /* Very small phone (320px) */
+        @media (max-width: 360px) {
+            .kpi-grid { grid-template-columns: 1fr; }
+            .proj-summary { grid-template-columns: 1fr; }
+            .funnel-label { min-width: 70px; }
+            .tooltip { width: 200px; }
         }
     </style>
 </head>
