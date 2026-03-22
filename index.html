@@ -154,6 +154,7 @@
         [data-theme="light"] .source-badge:hover { background: rgba(0,0,0,0.07); }
         [data-theme="light"] .breakdown-item { background: rgba(0,0,0,0.03); }
         [data-theme="light"] tr:hover td { background: rgba(0,0,0,0.02); }
+        [data-theme="light"] .date-badge { background: rgba(0,0,0,0.04); }
 
         /* ─── Reset ───────────────────────────────────────────────── */
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -458,6 +459,11 @@
         .alert--success { background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); color: var(--success-light); }
         .alert--warning { background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); color: var(--warning-light); }
         .alert--danger { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); color: var(--danger-light); }
+
+        /* Light mode: use darker alert text colors for contrast */
+        [data-theme="light"] .alert--success { color: #065f46; }
+        [data-theme="light"] .alert--warning { color: #92400e; }
+        [data-theme="light"] .alert--danger { color: #991b1b; }
 
         /* ─── Collapsible Sections ───────────────────────────────── */
         .card h2.collapsible {
@@ -981,10 +987,12 @@
 // ─── Charts (lazy-loaded after auth) ────────────────────────────────
 function initCharts() {
 // ─── Shared palette ─────────────────────────────────────────────────
+const isLight = document.documentElement.getAttribute('data-theme') === 'light';
 const C = {
     primary: '#6366f1', success: '#10b981', successLight: '#34d399',
-    danger: '#ef4444', muted: '#94a3b8', slate: '#475569', slateLight: '#64748b',
-    grid: 'rgba(255,255,255,0.05)',
+    danger: '#ef4444', muted: isLight ? '#64748b' : '#94a3b8',
+    slate: isLight ? '#cbd5e1' : '#475569', slateLight: isLight ? '#94a3b8' : '#64748b',
+    grid: isLight ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.05)',
     primaryFill: 'rgba(99, 102, 241, 0.1)',
     successFill: 'rgba(16, 185, 129, 0.1)',
     dangerFill: 'rgba(239, 68, 68, 0.05)',
