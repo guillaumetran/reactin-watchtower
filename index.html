@@ -694,7 +694,7 @@
     <header role="banner">
         <h1>🔭 ReactIn Growth Watchtower</h1>
         <div style="display: flex; align-items: center; gap: 0.75rem;">
-            <span class="date-badge" aria-label="Mis à jour le 13 Mars 2026"><span class="live-dot" aria-hidden="true"></span>📅 Mis à jour le 13 Mars 2026</span>
+            <span class="date-badge" aria-label="Mis à jour le 23 Mars 2026"><span class="live-dot" aria-hidden="true"></span>📅 Mis à jour le 23 Mars 2026</span>
             <button class="theme-toggle" onclick="window.print()" aria-label="Exporter en PDF" title="Exporter / Imprimer">
                 <span>🖨️</span>
                 <span class="theme-toggle__label">Export</span>
@@ -710,51 +710,53 @@
     <section class="kpi-grid kpi-grid--7" aria-label="Indicateurs clés de performance">
         <div class="kpi-card kpi-card--highlight" data-target="section-mrr" role="button" tabindex="0" aria-label="MRR – cliquez pour voir le graphique">
             <div class="kpi-label">MRR 🎉</div>
-            <div class="kpi-value">$6,197 <span class="mtd-badge">MTD</span></div>
-            <div class="kpi-change kpi-change--up">+9% vs Feb – $6K+ ! 🎉</div>
+            <div class="kpi-value">$6,089</div>
+            <div class="kpi-change kpi-change--up">+7% vs Feb – $6K+ ! 🎉</div>
         </div>
         <div class="kpi-card" data-target="section-subs" role="button" tabindex="0" aria-label="Paid Subscribers – cliquez pour voir le graphique">
             <div class="kpi-label">Paid Subscribers</div>
-            <div class="kpi-value">109</div>
-            <div class="kpi-change kpi-change--up">+2 vs Feb</div>
+            <div class="kpi-value">108</div>
+            <div class="kpi-change kpi-change--up">+1 vs Feb</div>
         </div>
         <div class="kpi-card" data-target="section-revenue" role="button" tabindex="0" aria-label="ARPU – cliquez pour voir le breakdown">
             <div class="kpi-label">ARPU</div>
-            <div class="kpi-value">$57</div>
-            <div class="kpi-change kpi-change--up">+$4 vs Feb</div>
+            <div class="kpi-value">$56</div>
+            <div class="kpi-change kpi-change--up">+$3 vs Feb</div>
         </div>
         <div class="kpi-card" data-target="section-traffic" role="button" tabindex="0" aria-label="SEO Impressions – cliquez pour voir les sources">
             <div class="kpi-label">SEO Impressions</div>
-            <div class="kpi-value">~95K</div>
-            <div class="kpi-change kpi-change--up">Mar proj. +138% 🚀</div>
+            <div class="kpi-value">53,605</div>
+            <div class="kpi-change kpi-change--up">MTD (proj. ~80K)</div>
         </div>
         <div class="kpi-card" data-target="section-funnel" role="button" tabindex="0" aria-label="Signups – cliquez pour voir le funnel">
             <div class="kpi-label">Signups</div>
-            <div class="kpi-value">61</div>
-            <div class="kpi-change kpi-change--up">MTD (proj. ~145)</div>
+            <div class="kpi-value">90</div>
+            <div class="kpi-change kpi-change--up">MTD (proj. ~140)</div>
         </div>
         <div class="kpi-card has-tooltip" tabindex="0" aria-describedby="tooltip-nrr">
             <div class="kpi-label">NRR (Mar MTD) <span class="info-icon" aria-hidden="true">ⓘ</span></div>
-            <div class="kpi-value">109%</div>
-            <div class="kpi-change kpi-change--up">✓ expansion &gt; churn</div>
+            <div class="kpi-value">95%</div>
+            <div class="kpi-change kpi-change--down">⚠️ churn &gt; expansion</div>
             <div class="tooltip" id="tooltip-nrr" role="tooltip">
                 <strong>Net Revenue Retention</strong><br><br>
-                Expansion: +$299 (7 users)<br>
-                Churn: –$340 (8 users)<br><br>
+                Expansion: +$368 (8 users)<br>
+                Contraction: –$108 (3 users)<br>
+                Churn: –$547 (11 users)<br><br>
                 &gt;100% = expansion &gt; churn ✓<br>
                 &lt;100% = churn &gt; expansion ⚠️
             </div>
         </div>
         <div class="kpi-card has-tooltip" tabindex="0" aria-describedby="tooltip-geo">
             <div class="kpi-label">Score GEO <span class="info-icon" aria-hidden="true">ⓘ</span></div>
-            <div class="kpi-value">57</div>
-            <div class="kpi-change kpi-change--up">+5 pts vs Feb 📈</div>
+            <div class="kpi-value">24</div>
+            <div class="kpi-change kpi-change--down">–33 pts vs MTD 1–13 ⚠️</div>
             <div class="tooltip" id="tooltip-geo" role="tooltip">
                 <strong>GEO Score (Generative Engine Optimization)</strong><br><br>
                 Visibilité dans les AIs (ChatGPT, Gemini, etc.)<br><br>
-                Mars: 57/100<br>
+                Mars MTD (1–20): 24/100<br>
+                Mars MTD (1–13): 57/100<br>
                 Février: 52/100<br><br>
-                Les AIs recommandent de plus en plus ReactIn ! 🤖
+                ⚠️ Forte baisse – à investiguer
             </div>
         </div>
     </section>
@@ -775,45 +777,45 @@
     <div class="grid-2">
         <div class="card" id="section-funnel">
             <h2>🎯 Activation Funnel</h2>
-            <p class="card__subtitle">Mars MTD (1–13) | <span style="color: var(--primary);">67% LinkedIn connected</span></p>
+            <p class="card__subtitle">Mars MTD (1–20) | <span style="color: var(--primary);">57% LinkedIn connected</span></p>
             <div class="funnel">
                 <div class="funnel-step">
                     <span class="funnel-label">Signups</span>
-                    <div class="funnel-bar funnel-bar--primary" style="width: 100%;">61</div>
+                    <div class="funnel-bar funnel-bar--primary" style="width: 100%;">90</div>
                     <span class="funnel-pct">100%</span>
                 </div>
                 <div class="funnel-step">
-                    <span class="funnel-conversion">↓ 67% conversion</span>
+                    <span class="funnel-conversion">↓ 57% conversion</span>
                     <span class="funnel-label">LinkedIn Connected</span>
-                    <div class="funnel-bar funnel-bar--primary" style="width: 67%;">41</div>
-                    <span class="funnel-pct">67%</span>
+                    <div class="funnel-bar funnel-bar--primary" style="width: 57%;">51</div>
+                    <span class="funnel-pct">57%</span>
                 </div>
                 <div class="funnel-step">
-                    <span class="funnel-conversion">↓ 54% conversion</span>
+                    <span class="funnel-conversion">↓ 49% conversion</span>
                     <span class="funnel-label">Campaign Running</span>
-                    <div class="funnel-bar funnel-bar--primary" style="width: 36%;">22</div>
-                    <span class="funnel-pct">36%</span>
+                    <div class="funnel-bar funnel-bar--primary" style="width: 28%;">25</div>
+                    <span class="funnel-pct">28%</span>
                 </div>
                 <div class="funnel-step">
-                    <span class="funnel-conversion">↓ 9% conversion</span>
+                    <span class="funnel-conversion">↓ 12% conversion</span>
                     <span class="funnel-label">Premium</span>
-                    <div class="funnel-bar funnel-bar--success" style="width: 5%;">2</div>
+                    <div class="funnel-bar funnel-bar--success" style="width: 3%;">3</div>
                     <span class="funnel-pct">3%</span>
                 </div>
             </div>
-            <p class="funnel-note">Activity: 336 lists · ~195 campaigns · ~18K requests · ~5K messages</p>
+            <p class="funnel-note">Activity: ~500 lists · ~220 campaigns · 27,280 requests · ~8K messages</p>
         </div>
         <div class="card" id="section-revenue">
             <h2>💰 Revenue Breakdown</h2>
-            <p class="card__subtitle">Mars MTD (1–13) | <span style="color: var(--primary);">🎉 MRR &gt; $6K!</span></p>
+            <p class="card__subtitle">Mars MTD (1–20) | <span style="color: var(--primary);">🎉 MRR &gt; $6K!</span></p>
             <div class="breakdown-grid">
                 <div class="breakdown-item breakdown-item--up">
                     <span class="label">🆕 New Biz</span>
-                    <span class="value">+$599 (9)</span>
+                    <span class="value">+$629 (10)</span>
                 </div>
                 <div class="breakdown-item breakdown-item--up">
                     <span class="label">📈 Expansion</span>
-                    <span class="value">+$299 (7) 🔥</span>
+                    <span class="value">+$368 (8)</span>
                 </div>
                 <div class="breakdown-item breakdown-item--down">
                     <span class="label">📉 Contraction</span>
@@ -821,7 +823,7 @@
                 </div>
                 <div class="breakdown-item breakdown-item--down">
                     <span class="label">❌ Churn</span>
-                    <span class="value">–$340 (8)</span>
+                    <span class="value">–$547 (11) ⚠️</span>
                 </div>
                 <div class="breakdown-item breakdown-item--up">
                     <span class="label">🔄 Reactivation</span>
@@ -829,7 +831,7 @@
                 </div>
                 <div class="breakdown-item breakdown-total">
                     <span class="label">Net Movement</span>
-                    <span class="value">+$519</span>
+                    <span class="value">+$411</span>
                 </div>
             </div>
         </div>
@@ -838,16 +840,17 @@
     <!-- Traffic Sources -->
     <div class="card section-gap" id="section-traffic">
         <h2>🌐 Traffic Sources</h2>
-        <p class="card__subtitle">Mars MTD (1–13) | Projection en vert</p>
+        <p class="card__subtitle">Mars MTD (1–20) | Projection en vert</p>
         <div class="traffic-sources">
-            <div class="source-badge source-badge--mtd"><span>SEO Impressions</span><span class="count">33,814</span></div>
-            <div class="source-badge source-badge--proj"><span>SEO Impr (proj.)</span><span class="count">~95K 🚀</span></div>
-            <div class="source-badge source-badge--mtd"><span>Visitors</span><span class="count">1,000</span></div>
-            <div class="source-badge source-badge--mtd"><span>Google</span><span class="count">287</span></div>
-            <div class="source-badge source-badge--mtd"><span>LinkedIn</span><span class="count">58</span></div>
+            <div class="source-badge source-badge--mtd"><span>SEO Impressions</span><span class="count">53,605</span></div>
+            <div class="source-badge source-badge--proj"><span>SEO Impr (proj.)</span><span class="count">~80K</span></div>
+            <div class="source-badge source-badge--mtd"><span>Visitors</span><span class="count">1,600</span></div>
+            <div class="source-badge source-badge--mtd"><span>Google</span><span class="count">403</span></div>
+            <div class="source-badge source-badge--mtd"><span>LinkedIn</span><span class="count">158</span></div>
             <div class="source-badge source-badge--mtd"><span>YouTube</span><span class="count">11</span></div>
-            <div class="source-badge source-badge--mtd"><span>Substack</span><span class="count">8</span></div>
-            <div class="source-badge source-badge--mtd"><span>Signups</span><span class="count">61</span></div>
+            <div class="source-badge source-badge--mtd"><span>Signups</span><span class="count">90</span></div>
+            <div class="source-badge source-badge--mtd"><span>Bounce Rate</span><span class="count">64% 🔥</span></div>
+            <div class="source-badge source-badge--mtd"><span>Avg Session</span><span class="count">3m37s 🔥</span></div>
         </div>
     </div>
 
@@ -876,57 +879,57 @@
                     <tr>
                         <th scope="row">SEO Impressions</th>
                         <td>15,626</td><td>10,344</td><td>12,161</td><td>10,709</td><td>34,814</td><td>39,791</td>
-                        <td class="highlight-cell">~95K proj. 🚀</td>
+                        <td class="highlight-cell">53,605 (~80K proj.)</td>
                     </tr>
                     <tr>
                         <th scope="row">LP Views</th>
                         <td>–</td><td>~3,400</td><td>~1,900</td><td>~2,000</td><td>2,200</td><td>2,450</td>
-                        <td class="highlight-cell">1,000</td>
+                        <td class="highlight-cell">1,600</td>
                     </tr>
                     <tr>
                         <th scope="row">LP Conversion</th>
                         <td>–</td><td>3.9%</td><td>5.8%</td><td>3.45%</td><td>4.1%</td><td>4.4%</td>
-                        <td class="highlight-cell">6.1%</td>
+                        <td class="highlight-cell">5.6%</td>
                     </tr>
                     <tr>
                         <th scope="row">Signups</th>
                         <td>92</td><td>134</td><td>110</td><td>69</td><td>90</td><td>109</td>
-                        <td class="highlight-cell">61 (~145 proj.)</td>
+                        <td class="highlight-cell">90 (~140 proj.)</td>
                     </tr>
                     <tr>
                         <th scope="row">Activation Rate</th>
                         <td>62%</td><td>65%</td><td>78%</td><td>–</td><td>54%</td><td>39%</td>
-                        <td class="highlight-cell">67% 📈</td>
+                        <td class="highlight-cell">57%</td>
                     </tr>
                     <tr>
                         <th scope="row">MRR</th>
                         <td>$2,497</td><td>$3,264</td><td>$4,322</td><td>$4,765</td><td>$5,431</td><td>$5,678</td>
-                        <td class="highlight-cell">$6,197 🎉</td>
+                        <td class="highlight-cell">$6,089</td>
                     </tr>
                     <tr>
                         <th scope="row">Paid Subs</th>
                         <td>–</td><td>80</td><td>86</td><td>92</td><td>100</td><td>107</td>
-                        <td class="highlight-cell">109</td>
+                        <td class="highlight-cell">108</td>
                     </tr>
                     <tr>
                         <th scope="row">ARPU</th>
                         <td>–</td><td>$41</td><td>$50</td><td>$52</td><td>$54</td><td>$53</td>
-                        <td class="highlight-cell">$57 📈</td>
+                        <td class="highlight-cell">$56</td>
                     </tr>
                     <tr>
                         <th scope="row">Churn (clients)</th>
                         <td>8</td><td>7</td><td>15</td><td>10</td><td>12</td><td>15</td>
-                        <td class="highlight-cell">8</td>
+                        <td class="highlight-cell">11 ⚠️</td>
                     </tr>
                     <tr>
                         <th scope="row">Churn (%)</th>
                         <td>–</td><td>9.7%</td><td>18.8%</td><td>11.6%</td><td>13.0%</td><td>14.0%</td>
-                        <td class="highlight-cell">7.3% ↓</td>
+                        <td class="highlight-cell">10.2%</td>
                     </tr>
                     <tr>
                         <th scope="row">GEO Score</th>
                         <td>–</td><td>–</td><td>–</td><td>–</td><td>–</td><td>52</td>
-                        <td class="highlight-cell">57 📈</td>
+                        <td class="highlight-cell">24 ⚠️</td>
                     </tr>
                 </tbody>
             </table>
@@ -936,7 +939,7 @@
     <!-- MRR Projection -->
     <div class="card section-gap">
         <h2>🔮 Projection MRR (12 mois)</h2>
-        <p class="card__subtitle">Basé sur la croissance récente MoM (~9% – moyenne Nov–Mar)</p>
+        <p class="card__subtitle">Basé sur la croissance récente MoM (~9% – moyenne Nov–Mar, conservateur)</p>
         <div class="chart-container chart-container--tall"><canvas id="projectionChart" aria-label="Graphique de projection MRR sur 12 mois" role="img"></canvas></div>
         <div class="proj-summary" id="proj-summary"><!-- Filled by JS --></div>
         <p class="proj-note">📊 Projection conservatrice basée sur le taux de croissance récent (9% MoM vs 21% historique)</p>
@@ -946,37 +949,41 @@
     <section class="alerts" aria-label="Alertes et faits marquants">
         <div class="alert alert--success">
             <strong>🎉 MILESTONE: MRR &gt; $6K !</strong>
-            $6,197 – Premier passage au-dessus des $6K !
+            $6,089 – Toujours au-dessus des $6K !
         </div>
         <div class="alert alert--success">
-            <strong>🚀 SEO Impressions ×2.4 !</strong>
-            Projette ~95K vs 40K en Feb (+138%)
+            <strong>🚀 SEO Impressions 53,605</strong>
+            MTD actuel, projection ~80K pour le mois (+101% vs Feb)
+        </div>
+        <div class="alert alert--danger">
+            <strong>⚠️ GEO Score effondré : 24/100</strong>
+            Était 57 au MTD 1–13 – Chute de –33 pts à investiguer !
+        </div>
+        <div class="alert alert--danger">
+            <strong>🚨 Churn en hausse : 11 clients, $547 perdus</strong>
+            Churn &gt; expansion ($368) – NRR à 95% ⚠️
         </div>
         <div class="alert alert--success">
-            <strong>📈 GEO Score +5 pts</strong>
-            57/100 – Les AIs recommandent de plus en plus ReactIn !
-        </div>
-        <div class="alert alert--success">
-            <strong>💪 Expansion forte</strong>
-            +$299 de 7 upsells – expansion &gt; churn !
-        </div>
-        <div class="alert alert--success">
-            <strong>📉 Churn en baisse</strong>
-            8 churns vs 15 en Feb. Bonne tendance !
-        </div>
-        <div class="alert alert--success">
-            <strong>🔗 Activation 67%</strong>
+            <strong>🔗 Activation 57%</strong>
             LinkedIn connected rate en hausse vs Feb (39%)
         </div>
+        <div class="alert alert--success">
+            <strong>🔥 Bounce Rate : 64% (était 82%)</strong>
+            –18 pts ! Les visiteurs restent plus longtemps sur le site.
+        </div>
+        <div class="alert alert--success">
+            <strong>🔥 Durée session : 3m37s (était 2m28s)</strong>
+            +46% de temps passé – engagement en nette amélioration !
+        </div>
         <div class="alert alert--warning">
-            <strong>⚠️ Premium MTD: 2</strong>
+            <strong>⚠️ Premium MTD: 3</strong>
             À surveiller sur le reste du mois.
         </div>
     </section>
 
     <footer role="contentinfo">
         ReactIn Growth Watchtower · Généré par Rufus 🐕 &amp; Clawd 🦫
-        <br><span style="font-size: 0.7rem; opacity: 0.6;">v6.0 · Dashboard build 2026-03-22</span>
+        <br><span style="font-size: 0.7rem; opacity: 0.6;">v6.1 · Dashboard build 2026-03-23</span>
     </footer>
 
 </main>
@@ -1014,7 +1021,7 @@ new Chart(document.getElementById('mrrChart'), {
     data: {
         labels: months,
         datasets: [{
-            data: [2497, 3264, 4322, 4765, 5431, 5678, 6197],
+            data: [2497, 3264, 4322, 4765, 5431, 5678, 6089],
             borderColor: C.primary,
             backgroundColor: C.primaryFill,
             fill: true, tension: 0.4,
@@ -1038,7 +1045,7 @@ new Chart(document.getElementById('subsChart'), {
     data: {
         labels: months,
         datasets: [{
-            data: [72, 80, 86, 92, 100, 107, 109],
+            data: [72, 80, 86, 92, 100, 107, 108],
             backgroundColor: [C.slate,C.slate,C.slate,C.slate,C.slate,C.slate,C.success],
             hoverBackgroundColor: [C.slateLight,C.slateLight,C.slateLight,C.slateLight,C.slateLight,C.slateLight,C.successLight],
             borderRadius: 6
@@ -1050,7 +1057,7 @@ new Chart(document.getElementById('subsChart'), {
 // ─── MRR Projection (computed) ──────────────────────────────────────
 const GROWTH = 0.09;
 const projLabels = ['Fév','Mar','Avr','Mai','Juin','Juil','Août','Sept','Oct','Nov','Déc','Jan','Fév','Mar'];
-const projMRR = [5678, 6197]; // Feb final, Mar MTD actual
+const projMRR = [5678, 6089]; // Feb final, Mar MTD actual
 
 for (let i = 2; i < 14; i++) {
     projMRR.push(Math.round(projMRR[i - 1] * (1 + GROWTH)));
