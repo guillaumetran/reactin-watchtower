@@ -83,7 +83,12 @@
             if (typeof startKPICounters === 'function') {
                 startKPICounters();
                 animateFunnelBars();
-                setupScrollReveal();
+                // Delay scroll reveal slightly to let layout settle after dashboard fade-in
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        setupScrollReveal();
+                    });
+                });
             }
         }
 
@@ -94,6 +99,11 @@
             html.setAttribute('data-theme', newTheme);
             localStorage.setItem('watchtower_theme', newTheme);
             updateThemeUI(newTheme);
+            // Re-render charts with updated palette
+            if (typeof Chart !== 'undefined') {
+                Chart.helpers.each(Chart.instances, function(instance) { instance.destroy(); });
+                initCharts();
+            }
         }
         function updateThemeUI(theme) {
             const icon = document.getElementById('theme-icon');
@@ -280,7 +290,7 @@
         #dashboard.visible .kpi-card { animation-delay: calc(var(--i) * 0.05s); }
 
         /* Cards animate when observed */
-        .card, .alert { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+        .card, .alert { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; will-change: opacity, transform; }
         .card.revealed, .alert.revealed { opacity: 1; transform: translateY(0); }
 
         /* Funnel bars animate width */
@@ -475,7 +485,7 @@
         }
         .card h2.collapsible.collapsed::after { transform: rotate(-90deg); }
         .card .collapsible-content {
-            overflow: hidden; max-height: 2000px;
+            overflow: hidden; max-height: 5000px;
             transition: max-height 0.3s ease, opacity 0.3s ease;
             opacity: 1;
         }
@@ -1317,6 +1327,14 @@ function animateFunnelBars() {
 
 // IntersectionObserver for cards and alerts entrance
 function setupScrollReveal() {
+    const elements = document.querySelectorAll('.card, .alert');
+
+    // Fallback: if IntersectionObserver not supported, reveal all
+    if (!('IntersectionObserver' in window)) {
+        elements.forEach(el => el.classList.add('revealed'));
+        return;
+    }
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -1324,12 +1342,21 @@ function setupScrollReveal() {
                 observer.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
 
-    document.querySelectorAll('.card, .alert').forEach((el, i) => {
+    elements.forEach((el, i) => {
         el.style.transitionDelay = (i % 4) * 0.08 + 's';
         observer.observe(el);
     });
+
+    // Safety net: reveal any still-hidden elements after 2s
+    setTimeout(() => {
+        elements.forEach(el => {
+            if (!el.classList.contains('revealed')) {
+                el.classList.add('revealed');
+            }
+        });
+    }, 2000);
 }
 
 </script>
